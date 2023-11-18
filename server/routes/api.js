@@ -3,6 +3,8 @@ const soloProjectController = require('../controllers/soloProjectController');
 
 const router = express.Router();
 
+router.get('/getallusers', soloProjectController.getAllUsers, (req, res) => res.status(200).json(res.locals.allUsers))
+
 router.post('/createuser', soloProjectController.createUser, (req, res) => res.status(200).json('create user done'));
 
 router.get('/getuser', soloProjectController.getUser, soloProjectController.startSession, soloProjectController.setUseridCookie, (req, res) => res.status(200).json(res.locals.user));

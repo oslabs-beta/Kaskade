@@ -3,6 +3,23 @@ const Session = require('../models/sessionModels');
 
 const soloProjectController = {};
 
+// added getAllUsers for testing purpose
+soloProjectController.getAllUsers = (req, res, next) => {
+  const findAllUsers = `SELECT * FROM users`;
+  db.query(findAllUsers)
+    .then(data => {
+      if(!data.rows[0]){
+        res.locals.allUsers = 'no user in db';
+      }
+      else{
+        res.locals.allUsers = data.rows;
+      }
+      return next();
+    })
+    .catch((e) => {
+      return next({log: 'getAllUsers failed', message: e.detail});});
+};
+
 soloProjectController.createUser = (req, res, next) => {
   const { fn, ln, email, pw } = req.body;
   const insertUser = `INSERT INTO users (fn, ln, email, pw) VALUES ('${fn}', '${ln}', '${email}', '${pw}')`;
