@@ -1,6 +1,10 @@
 const path = require('path');
 const express = require('express');
-const cookieParser = require('cookie-parser');
+
+const { Worker, isMainThread, parentPort, workerData,} = require('node:worker_threads');
+
+console.log(isMainThread)
+// const cookieParser = require('cookie-parser');
 
 
 const app = express();
@@ -11,15 +15,15 @@ const apiRouter = require('./routes/api');
 const PORT = 3000;
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../client')));
-app.use(cookieParser());
+// app.use(cookieParser());
 
 // app.use('/build', express.static(path.join(__dirname, '../build')));
 
 
 app.use('/api', apiRouter);
-app.get('/', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../index.html')));
+// app.get('/', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../index.html')));
 
 app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
 
