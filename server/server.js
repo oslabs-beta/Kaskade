@@ -1,23 +1,15 @@
 const path = require('path');
 const express = require('express');
 
-const { Worker, isMainThread, parentPort, workerData,} = require('node:worker_threads');
-
-console.log(isMainThread)
-// const cookieParser = require('cookie-parser');
+const { Worker,threadId, isMainThread, parentPort, workerData,} = require('worker_threads');
 
 
 const app = express();
-
 const apiRouter = require('./routes/api');
-
-
 const PORT = 3000;
 
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../client')));
-// app.use(cookieParser());
 
 // app.use('/build', express.static(path.join(__dirname, '../build')));
 
@@ -29,14 +21,14 @@ app.use((req, res) => res.status(404).send('This is not the page you\'re looking
 
 
 app.use((err, req, res, next) => {
-  const defaultErr = {
-    log: 'Express error handler caught unknown middleware error',
-    status: 500,
-    message: { err: 'An error occurred' },
-  };
-  const errorObj = Object.assign({}, defaultErr, err);
-  console.log(errorObj.log);
-  return res.status(errorObj.status).json(errorObj.message);
+  // const defaultErr = {
+  //   log: 'Express error handler caught unknown middleware error',
+  //   status: 500,
+  //   message: { err: 'An error occurred' },
+  // };
+  // const errorObj = Object.assign({}, defaultErr, err);
+  // console.log(err);
+  return res.status(500).json(err);
 });
 
 
