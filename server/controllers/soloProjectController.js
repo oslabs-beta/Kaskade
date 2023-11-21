@@ -1,23 +1,39 @@
+const path = require('path');
 const db = require('../models/soloProjectModels');
 const Session = require('../models/sessionModels');
+const { Worker,threadId, isMainThread, parentPort, workerData,} = require('worker_threads');
 
 const soloProjectController = {};
 
 // added getAllUsers for testing purpose
-soloProjectController.getAllUsers = (req, res, next) => {
-  const findAllUsers = `SELECT * FROM users`;
-  db.query(findAllUsers)
-    .then(data => {
-      if(!data.rows[0]){
-        res.locals.allUsers = 'no user in db';
-      }
-      else{
-        res.locals.allUsers = data.rows;
-      }
-      return next();
-    })
-    .catch((e) => {
-      return next({log: 'getAllUsers failed', message: e.detail});});
+soloProjectController.getAllUsers =  async (req, res, next) => {
+  const worker = new Worker(path.resolve(__dirname, './worker.js'));
+  worker.on("message", data => {
+    res.locals.allUsers = data;
+    return next();
+  });
+
+  worker.on('error', (error) => {
+    return next(error.message);
+  });
+  
+  
+  // const findAllUsers = `SELECT * FROM users`;
+  // try{
+  //   const data = await db.query(findAllUsers);
+  //   if(!data.rows[0]){
+  //     res.locals.allUsers = 'no user in db';
+  //   }
+  //   else{
+  //     res.locals.allUsers = data.rows;
+  //   }
+  //   return next();
+  // }
+  
+
+  // catch(e){
+  //   return next({log: 'getAllUsers failed', message: e.detail});
+  // };
 };
 
 soloProjectController.createUser = (req, res, next) => {
