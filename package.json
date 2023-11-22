@@ -1,0 +1,22 @@
+{
+  "name": "@panda-whale-ptri12/kaskade",
+  "version": "1.0.2",
+  "description": "",
+  "main": "kaskade.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oslabs-beta/Kaskade.git"
+  },
+  "keywords": [
+    "benchmarking"
+  ],
+  "author": "Wenzhen Gong, Jingjing Wang, Joel Christopher, Michael Mann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/Kaskade/issues"
+  },
+  "homepage": "https://github.com/oslabs-beta/Kaskade#readme"
+}
