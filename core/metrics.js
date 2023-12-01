@@ -44,7 +44,7 @@ class Metrics {
     // called after runner received an error, save the erro info
 
     afterReceiveError(sessionId, requestId, statusCode) {
-        let key = getKey(sessionId, requestId);
+        let key = this.getKey(sessionId, requestId);
 
         if (!key in this.errorStats) {
             this.errorStats[key] = {};
