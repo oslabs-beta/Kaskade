@@ -1,8 +1,15 @@
 const fs = require('fs');
-const configString = fs.readFileSync(process.argv[2])
-const config = JSON.parse(configString);
-console.log(config);
+const path = require('path');
+const manager = require('./core/manager')
 
-module.exports.testFunc = () => {
-  console.log('I am from kaskade package')
+function init(configPath) {
+  try{
+    const configString = fs.readFileSync(configPath);
+    const opts = JSON.parse(configString);
+    return manager(opts, console.log);
+  }
+  catch(e){
+    console.log(e)
+  }
 }
+module.exports = init

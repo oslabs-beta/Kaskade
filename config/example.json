@@ -5,6 +5,7 @@
     "testDuration": 600,
     "concurrentUsers": 100,
     "targetThroughput": 1000,
+    "numOfWorkers":4,
     "sessions": [
         {
             "sessionName": "login and add to cart session",
