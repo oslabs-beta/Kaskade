@@ -1,5 +1,5 @@
-const HttpClient = require("./httpClient");
-const Metrics = require("./metrics");
+// const HttpClient = require("./httpClient");
+const Metrics = require("@panda-whale-ptri12/kaskade/core/metrics");
 
 // 1. create an httpClient
 // 1.1. mark benchmark starting time
@@ -9,7 +9,7 @@ const Metrics = require("./metrics");
 // 5. send to the next request
 
 
-function runner(config) {
+/* function runner(config) {
     // create an httpClient
     const httpClient = new HttpClient(config);   
 
@@ -56,5 +56,24 @@ function runner(config) {
     // send the first request
     selectRequest();
 }
+ */
 
+// WENZHEN TEST RUNNER FUNCTION (SIMULATING ASYNC)
+function runner(opts, callback){
+    const metrics = new Metrics(); 
+    metrics.beforeSendRequest('testSessionId', 'testRequestId');
+    
+    // start simulating async axios requests
+    const promiseA = new Promise((resolve, reject) => {
+        let res = 0;
+        for(let i = 0; i <= 10_000_000_000; i++){
+              res += i;
+        }
+        resolve(res);
+      });
+    // async axios requests ends
+    
+    metrics.afterReceiveResponse('testSessionId', 'testRequestId') ;
+    return metrics;
+}
 module.exports = runner;

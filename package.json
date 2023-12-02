@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/oslabs-beta/Kaskade/issues"
   },
-  "homepage": "https://github.com/oslabs-beta/Kaskade#readme"
+  "homepage": "https://github.com/oslabs-beta/Kaskade#readme",
+  "dependencies": {
+    "path": "^0.12.7"
+  }
 }
