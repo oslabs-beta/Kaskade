@@ -1,5 +1,5 @@
-// const HttpClient = require("./httpClient");
-const Metrics = require("@panda-whale-ptri12/kaskade/core/metrics");
+const HttpClient = require("./httpClient");
+const Metrics = require("./metrics");
 
 // 1. create an httpClient
 // 1.1. mark benchmark starting time
@@ -9,11 +9,8 @@ const Metrics = require("@panda-whale-ptri12/kaskade/core/metrics");
 // 5. send to the next request
 
 
-<<<<<<< WG/manager.js
-/* function runner(config) {
-=======
 function runner(config, resultCb) {
->>>>>>> dev
+
     // create an httpClient
     const httpClient = new HttpClient(config);   
 
@@ -68,10 +65,10 @@ function runner(config, resultCb) {
     // send the first request
     selectRequest();
 }
- */
+
 
 // WENZHEN TEST RUNNER FUNCTION (SIMULATING ASYNC)
-function runner(opts, callback){
+function runnerTest(opts, callback){
     const metrics = new Metrics(); 
     metrics.beforeSendRequest('testSessionId', 'testRequestId');
     
