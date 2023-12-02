@@ -9,7 +9,7 @@ const Metrics = require("./metrics");
 // 5. send to the next request
 
 
-function runner(config) {
+function runner(config, resultCb) {
     // create an httpClient
     const httpClient = new HttpClient(config);   
 
@@ -32,12 +32,12 @@ function runner(config) {
         if (currentTime - runnerStartTime > config.testDuration * 1000) {
             // The benchmark completes
             // to-do: need to notify the main about the completion, and report metrics result.
-            
+            resultCb(metrics);
             return;
         }
         // 3. send one request
         metrics.beforeSendRequest(sessionId, requestId);
-        httpClient.sendRequest(config.sessions[sessionId].requests[requestId], onResponse);  
+        httpClient.sendRequest(config.sessions[sessionId].requests[requestId], onResponse, onError);  
     }
 
     function onResponse() {
@@ -50,6 +50,14 @@ function runner(config) {
             requestId = 0;
             // to-do: support multiple sessions for stretch
         }
+        selectRequest();
+    }
+
+    function onError(statusCode) {
+        // receive the error status from httpClient, and save the information, pass to metrics
+        metrics.afterReceiveError(sessionId, requestId, statusCode);
+       // skip the current round following requests, and redo the next round of requests in this session
+        requestId = 0;
         selectRequest();
     }
   
