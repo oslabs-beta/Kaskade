@@ -1,5 +1,5 @@
-// const HttpClient = require("./httpClient");
-const Metrics = require("@panda-whale-ptri12/kaskade/core/metrics");
+const HttpClient = require("./httpClient");
+const Metrics = require("./metrics");
 
 // 1. create an httpClient
 // 1.1. mark benchmark starting time
