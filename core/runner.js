@@ -9,7 +9,11 @@ const Metrics = require("@panda-whale-ptri12/kaskade/core/metrics");
 // 5. send to the next request
 
 
+<<<<<<< WG/manager.js
 /* function runner(config) {
+=======
+function runner(config, resultCb) {
+>>>>>>> dev
     // create an httpClient
     const httpClient = new HttpClient(config);   
 
@@ -32,12 +36,12 @@ const Metrics = require("@panda-whale-ptri12/kaskade/core/metrics");
         if (currentTime - runnerStartTime > config.testDuration * 1000) {
             // The benchmark completes
             // to-do: need to notify the main about the completion, and report metrics result.
-            
+            resultCb(metrics);
             return;
         }
         // 3. send one request
         metrics.beforeSendRequest(sessionId, requestId);
-        httpClient.sendRequest(config.sessions[sessionId].requests[requestId], onResponse);  
+        httpClient.sendRequest(config.sessions[sessionId].requests[requestId], onResponse, onError);  
     }
 
     function onResponse() {
@@ -50,6 +54,14 @@ const Metrics = require("@panda-whale-ptri12/kaskade/core/metrics");
             requestId = 0;
             // to-do: support multiple sessions for stretch
         }
+        selectRequest();
+    }
+
+    function onError(statusCode) {
+        // receive the error status from httpClient, and save the information, pass to metrics
+        metrics.afterReceiveError(sessionId, requestId, statusCode);
+       // skip the current round following requests, and redo the next round of requests in this session
+        requestId = 0;
         selectRequest();
     }
   
