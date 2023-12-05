@@ -1,7 +1,12 @@
 class Metrics {
 
     constructor() {
-        this.startTime = null;
+        // the start time of this runner
+        this.benchmarkStartTime = Date.now();
+
+        // the start time of current request
+        this.requestStartTime = null;
+
         // key: sessionId + requestId; value: an array of latency
         // example: {s0_r0: [2, 3, 2, 1], s0_r1: [1, 2, 2, 3], s0_r2: [2, 3, 2, 3]}
         this.latencyStats = {};
@@ -11,9 +16,16 @@ class Metrics {
         this.errorStats = {};
 
         // the total count of success request, use to calculate the request per second throughput
-        // in manager.js, sum up the totalSuccess of all connections, then divide by the testDuration time
         this.totalSuccessRequest = 0;
+
+        // the number of success requests received in each second of the benchmark
+        this.successRequestInEachSecond = [];
+
+        // the total number of bytes used to calculate bytes per second throughput
         this.totalBytes = 0;
+
+         // the number of bytes received in each second of the benchmark
+        this.bytesInEachSecond = [];
 
     }
 
@@ -24,13 +36,13 @@ class Metrics {
 
     // called before runner send out a request, mark the start time
     beforeSendRequest(sessionId, requestId) {
-        this.startTime = Date.now();
+        this.requestStartTime = Date.now();
     }
 
     // called after runner received a response, measure the latency
 
     afterReceiveResponse(sessionId, requestId, size) {
-        let requestLatency = Date.now() - this.startTime;
+        let requestLatency = Date.now() - this.requestStartTime;
         let key = this.getKey(sessionId, requestId);
 
         if (!key in this.latencyStats) {
@@ -39,6 +51,17 @@ class Metrics {
         this.latencyStats[key].push(requestLatency);
         this.totalSuccessRequest++;
         this.totalBytes += size;
+
+        let currentTime = Date.now();
+        let currentSec = Math.floor((currentTime - this.benchmarkStartTime) / 1000);
+
+        while (this.successRequestInEachSecond.length <= currentSec) {
+            this.successRequestInEachSecond.push(0);
+            this.bytesInEachSecond.push(0);
+        }
+
+        this.successRequestInEachSecond[currentSec]++;
+        this.bytesInEachSecond[currentSec] += size;
     }
 
 
@@ -66,7 +89,7 @@ class Metrics {
         this.totalSuccessRequest += otherMetrics.totalSuccessRequest;
         // latency stats
         for (let key in otherMetrics.latencyStats) {
-            if (key in  this.latencyStats) {
+            if (key in this.latencyStats) {
                 this.latencyStats[key] = this.latencyStats[key].concat(otherMetrics.latencyStats[key]);
             } else {
                 this.latencyStats[key] = otherMetrics.latencyStats[key];
@@ -74,7 +97,7 @@ class Metrics {
         }
         // error stats
         for (let key in otherMetrics.errorStats) {
-            if (key in  this.errorStats) {
+            if (key in this.errorStats) {
                 for (let statusCode in otherMetrics.errorStats[key]) {
                     if (statusCode in this.errorStats[key]) {
                         this.errorStats[key][statusCode] += otherMetrics.errorStats[key][statusCode];
@@ -85,6 +108,18 @@ class Metrics {
             } else {
                 this.errorStats[key] = otherMetrics.errorStats[key];
             }
+        }
+        for (let i = 0; i < otherMetrics.successRequestInEachSecond.length; i++) {
+            if (this.successRequestInEachSecond.length <= i) {
+                this.successRequestInEachSecond.push(0);
+            }
+            this.successRequestInEachSecond[i] += otherMetrics.successRequestInEachSecond[i];
+        }
+        for (let i = 0; i < otherMetrics.bytesInEachSecond.length; i++) {
+            if (this.bytesInEachSecond.length <= i) {
+                this.bytesInEachSecond.push(0);
+            }
+            this.bytesInEachSecond[i] += otherMetrics.bytesInEachSecond[i];
         }
     }
 }
