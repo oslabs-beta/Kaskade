@@ -13,6 +13,7 @@ class Metrics {
         // the total count of success request, use to calculate the request per second throughput
         // in manager.js, sum up the totalSuccess of all connections, then divide by the testDuration time
         this.totalSuccessRequest = 0;
+        this.totalBytes = 0;
 
     }
 
@@ -28,7 +29,7 @@ class Metrics {
 
     // called after runner received a response, measure the latency
 
-    afterReceiveResponse(sessionId, requestId) {
+    afterReceiveResponse(sessionId, requestId, size) {
         let requestLatency = Date.now() - this.startTime;
         let key = this.getKey(sessionId, requestId);
 
@@ -37,7 +38,7 @@ class Metrics {
         }
         this.latencyStats[key].push(requestLatency);
         this.totalSuccessRequest++;
-
+        this.totalBytes += size;
     }
 
 
@@ -58,6 +59,33 @@ class Metrics {
         }
        
 
+    }
+
+    aggregate(otherMetrics) {
+        this.totalBytes += otherMetrics.totalBytes;
+        this.totalSuccessRequest += otherMetrics.totalSuccessRequest;
+        // latency stats
+        for (let key in otherMetrics.latencyStats) {
+            if (key in  this.latencyStats) {
+                this.latencyStats[key] = this.latencyStats[key].concat(otherMetrics.latencyStats[key]);
+            } else {
+                this.latencyStats[key] = otherMetrics.latencyStats[key];
+            }
+        }
+        // error stats
+        for (let key in otherMetrics.errorStats) {
+            if (key in  this.errorStats) {
+                for (let statusCode in otherMetrics.errorStats[key]) {
+                    if (statusCode in this.errorStats[key]) {
+                        this.errorStats[key][statusCode] += otherMetrics.errorStats[key][statusCode];
+                    } else {
+                        this.errorStats[key][statusCode] = otherMetrics.errorStats[key][statusCode];
+                    }
+                }
+            } else {
+                this.errorStats[key] = otherMetrics.errorStats[key];
+            }
+        }
     }
 }
 
