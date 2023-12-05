@@ -30,9 +30,9 @@ for (let key in finalMetrics.latencyStats) {
 // calculate error stats
 
 // calculate request throughput
-let requestResult = finalMetrics.totalSuccessRequest / config.testDuration
+const requestResult = finalMetrics.totalSuccessRequest / config.testDuration
 // calculate bytes throughput
-let bytesResult = finalMetrics.totalBytes / config.testDuration
+const bytesResult = finalMetrics.totalBytes / config.testDuration
 
 
 }
