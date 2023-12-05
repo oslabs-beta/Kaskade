@@ -1,6 +1,6 @@
-// const HttpClient = require("./httpClient");
-const Metrics = require("@panda-whale-ptri12/kaskade/core/metrics");
-
+const HttpClient = require("./httpClient");
+const Metrics = require("./metrics");
+const config = require("./../config/example.json")
 // 1. create an httpClient
 // 1.1. mark benchmark starting time
 // 2. check if testDuration time is over
@@ -9,7 +9,8 @@ const Metrics = require("@panda-whale-ptri12/kaskade/core/metrics");
 // 5. send to the next request
 
 
-/* function runner(config, resultCb) {
+function runner(config, resultCb) {
+
     // create an httpClient
     const httpClient = new HttpClient(config);   
 
@@ -37,12 +38,12 @@ const Metrics = require("@panda-whale-ptri12/kaskade/core/metrics");
         }
         // 3. send one request
         metrics.beforeSendRequest(sessionId, requestId);
-        httpClient.sendRequest(config.sessions[sessionId].requests[requestId], onResponse, onError);  
+        httpClient.makeRequest(config.sessions[sessionId].requests[requestId], onResponse, onError);  
     }
 
-    function onResponse() {
+    function onResponse(data) {
         // 4. receive the response from httpClient, and save the information, pass to metrics
-        metrics.afterReceiveResponse(sessionId, requestId);
+        metrics.afterReceiveResponse(sessionId, requestId, data);
         // 5. send to the next request
         requestId ++;
         // check if this session ends; if so, start a new session
@@ -64,10 +65,10 @@ const Metrics = require("@panda-whale-ptri12/kaskade/core/metrics");
     // send the first request
     selectRequest();
 }
- */
+
 
 // WENZHEN TEST RUNNER FUNCTION (SIMULATING ASYNC)
-function runner(opts, callback){
+function runnerTest(opts, callback){
     const metrics = new Metrics(); 
     metrics.beforeSendRequest('testSessionId', 'testRequestId');
     
