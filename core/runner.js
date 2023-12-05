@@ -9,11 +9,7 @@ const Metrics = require("@panda-whale-ptri12/kaskade/core/metrics");
 // 5. send to the next request
 
 
-<<<<<<< WG/manager.js
-/* function runner(config) {
-=======
-function runner(config, resultCb) {
->>>>>>> dev
+/* function runner(config, resultCb) {
     // create an httpClient
     const httpClient = new HttpClient(config);   
 
