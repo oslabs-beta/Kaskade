@@ -1,12 +1,14 @@
 class Metrics {
 
     constructor() {
+        //------------- the following are temp data -------------
         // the start time of this runner
         this.benchmarkStartTime = Date.now();
 
         // the start time of current request
         this.requestStartTime = null;
 
+        //------------- the following are metrics data -------------
         // key: sessionId + requestId; value: an array of latency
         // example: {s0_r0: [2, 3, 2, 1], s0_r1: [1, 2, 2, 3], s0_r2: [2, 3, 2, 3]}
         this.latencyStats = {};
@@ -84,6 +86,7 @@ class Metrics {
 
     }
 
+    // aggregate other metrics onto this metrics
     aggregate(otherMetrics) {
         this.totalBytes += otherMetrics.totalBytes;
         this.totalSuccessRequest += otherMetrics.totalSuccessRequest;

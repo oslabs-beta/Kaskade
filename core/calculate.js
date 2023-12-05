@@ -3,7 +3,6 @@ const hdr = require('hdr-histogram-js')
 const histUtil = require('hdr-histogram-percentiles-obj')
 const Metrics = require("./metrics");
 
-hdr.initWebAssemblySync();
 const createHistogram = (data) => {
 
   const histogram = hdr.build({ useWebAssembly: true });
@@ -22,13 +21,7 @@ const createHistogram = (data) => {
 }
 
 function calculate(metrics, config) {
-
-  //     received metrics example: an array of metrics object from each runner
-  //     [{latencyStats: {s0_r0: [2, 3, 2, 1], s0_r1: [1, 2, 2, 3], s0_r2: [2, 3, 2, 3]},
-  // errorStas:{s0_r0: {400: 3, 404: 4, 500: 5}, s0_r1: {400: 2, 404: 1, 500: 2}, s0_r2: {400: 2, 404: 3, 500: 2}}, 
-  // totalSuccessRequest: 500, totalBytes: 10,000 }, {}, {}, {} ]
-
-
+  hdr.initWebAssemblySync();
 
   // Aggregate all metrics into one metrics
   const finalMetrics = new Metrics();
@@ -38,27 +31,33 @@ function calculate(metrics, config) {
   }
 
   // calculate latency stats
+  const latencyStats = {};
   for (let key in finalMetrics.latencyStats) {
-    let latencyResult = createHistogram(finalMetrics.latencyStats[key]);
-    console.log(latencyResult);
+    latencyStats[key] = createHistogram(finalMetrics.latencyStats[key]);
   }
 
   // calculate error stats
 
-  // calculate request throughput
-  const requestResult = finalMetrics.totalSuccessRequest / config.testDuration;
-  console.log("Average request throughput: ", requestResult);
-  // calculate bytes throughput
-  const byteResult = finalMetrics.totalBytes / config.testDuration;
-  console.log("Average byte throughput: ", byteResult);
 
-  let requestHistogramResult = createHistogram(finalMetrics.successRequestInEachSecond);
-  console.log(requestHistogramResult);
-  let byteHistogramResult = createHistogram(finalMetrics.bytesInEachSecond);
-  console.log(byteHistogramResult);
+
+  // calculate request throughput
+  const averagRequestThroughput = finalMetrics.totalSuccessRequest / config.testDuration;
+  // console.log("Average request throughput: ", averagRequestThroughput);
+
+  // calculate bytes throughput
+  const averageByteThroughput = finalMetrics.totalBytes / config.testDuration;
+  // console.log("Average byte throughput: ", averageByteThroughput);
+
+  let requestThroughputStats = createHistogram(finalMetrics.successRequestInEachSecond);
+  // console.log(requestThroughputStats);
+  let byteThroughputStats = createHistogram(finalMetrics.bytesInEachSecond);
+  // console.log(byteThroughputStats);
+
+  // return the overall result
+  return {latencyStats, averagRequestThroughput, averageByteThroughput, requestThroughputStats, byteThroughputStats}
 }
 
-
+// --------------------- test --------------------------
 // let metrics1 = new Metrics();
 // metrics1.latencyStats["s0_r0"] = [2, 3, 2, 1];
 // metrics1.latencyStats["s0_r1"] = [1, 2, 2, 3];
@@ -77,10 +76,7 @@ function calculate(metrics, config) {
 // metrics2.successRequestInEachSecond = [1, 1, 3, 1, 0, 2, 0, 1, 1, 2];
 // metrics2.bytesInEachSecond = [60, 30, 30, 10, 0, 20, 0, 10, 10, 40];
 
-// calculate([metrics1, metrics2], {testDuration: 10});
-
-
-
+// console.log(calculate([metrics1, metrics2], {testDuration: 10}));
 
 
 
