@@ -1,6 +1,25 @@
+// require in hdr histogram and utilities
 const hdr = require('hdr-histogram-js')
 const histUtil = require('hdr-histogram-percentiles-obj')
 const Metrics = require("./metrics");
+
+hdr.initWebAssemblySync();
+const createHistogram = (data) => {
+
+    const histogram = hdr.build({ useWebAssembly: true });
+  
+    data.forEach((value) => {
+      histogram.recordValue(value)
+    })
+
+    // below code adds additional percentiles to the returned statistics object
+    const resultWithPercentiles = histogramUtil.addPercentiles(histogram, histogramUtil.histAsObj(histogram, histogram.totalCount))
+    // console.log(resultWithPercentiles)
+  
+    // free up memory once histogram is no longer needed
+    histogram.destroy();
+    return
+  }
 
 function calculate(metrics, config) {
 
@@ -20,11 +39,12 @@ for (let i = 0; i < metrics.length; i++) {
 
 // calculate latency stats
 for (let key in finalMetrics.latencyStats) {
-    let histogram = hdr.build();
-    for (let i = 0; i < finalMetrics.latencyStats[key].length; i++) {
-        histogram.recordValue(finalMetrics.latencyStats[key][i]);
+    createHistogram(finalMetrics.latencyStats[key])
+    // let histogram = hdr.build();
+    // for (let i = 0; i < finalMetrics.latencyStats[key].length; i++) {
+    //     histogram.recordValue(finalMetrics.latencyStats[key][i]);
     }
-//    console.log(key, histogram);
+
 }
 
 // calculate error stats
@@ -49,5 +69,10 @@ const bytesResult = finalMetrics.totalBytes / config.testDuration
 // metrics2.latencyStats["s0_r2"] = [20, 30, 20, 30];
 
 // calculate([metrics1, metrics2]);
+
+
+
+
+
 
 module.exports = calculate;

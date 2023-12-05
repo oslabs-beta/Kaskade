@@ -1,6 +1,6 @@
 const HttpClient = require("./httpClient");
 const Metrics = require("./metrics");
-
+const config = require("./../config/example.json")
 // 1. create an httpClient
 // 1.1. mark benchmark starting time
 // 2. check if testDuration time is over
@@ -38,12 +38,12 @@ function runner(config, resultCb) {
         }
         // 3. send one request
         metrics.beforeSendRequest(sessionId, requestId);
-        httpClient.sendRequest(config.sessions[sessionId].requests[requestId], onResponse, onError);  
+        httpClient.makeRequest(config.sessions[sessionId].requests[requestId], onResponse, onError);  
     }
 
-    function onResponse() {
+    function onResponse(data) {
         // 4. receive the response from httpClient, and save the information, pass to metrics
-        metrics.afterReceiveResponse(sessionId, requestId);
+        metrics.afterReceiveResponse(sessionId, requestId, data);
         // 5. send to the next request
         requestId ++;
         // check if this session ends; if so, start a new session
