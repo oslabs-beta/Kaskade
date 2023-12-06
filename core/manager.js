@@ -2,6 +2,8 @@ const runner =require('@panda-whale-ptri12/kaskade/core/runner');
 const path = require('path');
 const { Worker, isMainThread, parentPort, workerData} = require('node:worker_threads');
 const { Resolver } = require('dns');
+const printResults = require('./printResults');
+const calculate = require('./calculate');
 
 async function manager(opts, resultCb){
   if(opts.numOfWorkers === 1){
@@ -19,6 +21,9 @@ async function manager(opts, resultCb){
       })) 
     }
     const result = await Promise.all(workerPromises)
+
+    printResults(calculate(metrics, config));
+
     return resultCb(result);
   }
 }
