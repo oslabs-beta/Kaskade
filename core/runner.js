@@ -9,7 +9,7 @@ const config = require("./../config/example.json")
 // 5. send to the next request
 
 
-function runner(config, resultCb) {
+function runnerCb(config, resultCb) {
 
     // create an httpClient
     const httpClient = new HttpClient(config);   
@@ -85,4 +85,13 @@ function runnerTest(opts, callback){
     metrics.afterReceiveResponse('testSessionId', 'testRequestId') ;
     return metrics;
 }
+
+function runner(config) {
+    return new Promise((resolve, reject) => {
+        runnerCb(config, (metrics) => {
+            resolve(metrics);
+        })
+    });
+}
+
 module.exports = runner;
