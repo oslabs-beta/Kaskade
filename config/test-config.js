@@ -58,4 +58,7 @@ const testConfig = {
     ]
   };
 
-// console.log("Stringified object if needed: ", JSON.stringify(testConfig))
+  
+const Jsonobject = JSON.stringify(testConfig)
+
+console.log("Stringified object if needed: ", Jsonobject)
