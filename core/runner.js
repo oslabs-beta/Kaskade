@@ -68,26 +68,6 @@ function runnerCb(config, resultCb) {
     selectRequest();
 }
 
-
-// WENZHEN TEST RUNNER FUNCTION (SIMULATING ASYNC)
-function runnerTest(opts, callback){
-    const metrics = new Metrics(); 
-    metrics.beforeSendRequest('testSessionId', 'testRequestId');
-    
-    // start simulating async axios requests
-    const promiseA = new Promise((resolve, reject) => {
-        let res = 0;
-        for(let i = 0; i <= 10_000_000_000; i++){
-              res += i;
-        }
-        resolve(res);
-      });
-    // async axios requests ends
-    
-    metrics.afterReceiveResponse('testSessionId', 'testRequestId') ;
-    return metrics;
-}
-
 function runner(config) {
     return new Promise((resolve, reject) => {
         runnerCb(config, (metrics) => {
