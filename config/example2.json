@@ -1,0 +1,24 @@
+{
+    "servers": [
+        "localhost:3000"
+    ],
+    "testDuration": 600,
+    "concurrentUsers": 100,
+    "targetThroughput": 1000,
+    "numOfWorkers":4,
+    "sessions": [
+        {
+            "sessionName": "Kaskade TEST",
+            "requests": [
+                {
+                    "requestName": "Get all users",
+                    "url": "/api/getallusers",
+                    "method": "GET",
+                    "headers": {
+                        "Content-type": "application/json"
+                    }
+                }
+            ]
+        }
+    ]
+}
