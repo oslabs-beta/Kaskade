@@ -49,7 +49,7 @@ class Metrics {
         let requestLatency = Date.now() - this.requestStartTime;
         let key = this.getKey(sessionId, requestId);
 
-        if (!key in this.latencyStats) {
+        if (!(key in this.latencyStats)) {
             this.latencyStats[key] = [];
         }
         this.latencyStats[key].push(requestLatency);
@@ -74,7 +74,7 @@ class Metrics {
     afterReceiveError(sessionId, requestId, statusCode) {
         let key = this.getKey(sessionId, requestId);
 
-        if (!key in this.errorStats) {
+        if (!(key in this.errorStats)) {
             this.errorStats[key] = {};
             this.errorStats[key][statusCode] = 1;
         } else {
