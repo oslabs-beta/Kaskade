@@ -2,10 +2,10 @@
     "servers": [
         "localhost:3000"
     ],
-    "testDuration": 600,
+    "testDuration": 10,
     "concurrentUsers": 100,
     "targetThroughput": 1000,
-    "numOfWorkers":4,
+    "numOfWorkers":100,
     "sessions": [
         {
             "sessionName": "Kaskade TEST",

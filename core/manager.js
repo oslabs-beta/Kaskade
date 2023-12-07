@@ -20,21 +20,20 @@ async function manager(opts){
     console.log(printResults(calculate(result, opts)));
   }
   else{
-    const workerPromises = []
-
+    const workerPromises = [];
+    opts.concurrentUsers /= opts.numOfWorkers;
     for(let i = 0; i < opts.numOfWorkers; i++){
       workerPromises.push(new Promise((resolve, reject) => {
         const worker = new Worker(path.resolve(__dirname, './worker.js'), {workerData: opts});
         worker.on('message', msg => {
-          resolve(msg.latencyStats);
+          resolve(msg);
         })
       })) 
     }
     const result = await Promise.all(workerPromises)
+    const final = result.flat()
+    console.log(printResults(calculate(final, opts)));
 
-    printResults(calculate(metrics, config));
-
-    return resultCb(result);
   }
 }
 
