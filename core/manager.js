@@ -1,7 +1,9 @@
-const runner =require('@panda-whale-ptri12/kaskade/core/runner');
+'use strict'
+
+const runner =require('./runner');
 const path = require('path');
 const { Worker, isMainThread, parentPort, workerData} = require('node:worker_threads');
-const { Resolver } = require('dns');
+
 const printResults = require('./printResults');
 const calculate = require('./calculate');
 

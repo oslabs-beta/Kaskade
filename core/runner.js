@@ -1,4 +1,6 @@
-const HttpClient = require("./httpClient");
+'use strict'
+
+const HttpClient = require("./HttpClient");
 const Metrics = require("./metrics");
 const config = require("./../config/example.json")
 // 1. create an httpClient

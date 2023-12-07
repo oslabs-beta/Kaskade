@@ -1,3 +1,5 @@
+'use strict'
+
 // require cli-table3 to create table in console
 const Table = require('cli-table3');
 

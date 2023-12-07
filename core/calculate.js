@@ -1,3 +1,5 @@
+'use strict'
+
 // require in hdr histogram and utilities
 const hdr = require('hdr-histogram-js')
 const histUtil = require('hdr-histogram-percentiles-obj')

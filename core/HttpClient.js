@@ -1,3 +1,5 @@
+'use strict'
+
 const http = require('http');
 
 //test example of direct access to entire config file
