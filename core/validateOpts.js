@@ -21,42 +21,37 @@ function validateOpts(opts){
     };
     const isValidRequest = request => {
       const {requestName, url, method, headers, body} = request;
-
       if(typeof request !== 'object' || Array.isArray(request)){
-        console.log('RETURING FLASE')
-
-        return false
-      }
-      else{
-         if(!requestName || typeof requestName !== 'string' || isValidRequest(url)){
-          
-          return false;
-         }
-         else{
-          if(method && (method !== 'GET' || method !== 'POST' || method !== 'PATCH' || method !== 'DELETE' || method !== 'PUT')){
-            return false;
-          }
-          else if(typeof headers !== 'object' || Array.isArray(headers)){
-            return false;
-          }
-          else if(typeof body !== 'object' || Array.isArray(body)){
-            return false;
-          }
-         }
-         return true;
-      }
-    };
-
-    const isValidSession = session => {
-      const { sessionName, requests } = session;
-      console.log('this is REQUESTS: ', requests)
-
-      if(!sessionName || !requests){
+        // throw new Error('request is not an object');
         return false;
       }
       else{
+        if(!requestName || !url || typeof requestName !== 'string' || url[0] !== '/'){
+          throw new Error('Possible error: \n0.url missing\n1.requestName missing\n2.requestName is not a string\n3.invalid url');
+        }
+        else{
+          if(method && method !== 'GET' && method !== 'POST' && method !== 'PATCH' && method !== 'DELETE' && method !== 'PUT'){
+            throw new Error('invalid method');
+          }
+          else if(typeof headers !== 'object' || Array.isArray(headers)){
+            throw new Error('headers is not an object');
+          }
+          else if(body && (typeof body !== 'object' || Array.isArray(body))){
+            throw new Error('body is not an object');
+          }
+        }
+        return true;
+      }
+    };
+    
+    const isValidSession = session => {
+      const { sessionName, requests } = session;
+      if(!sessionName || !requests){
+        throw new Error('sessionName or requests missing');
+      }
+      else{
         if(!Array.isArray(requests) || requests.length < 1 || typeof sessionName !== 'string'){
-          return false;
+          throw new Error('Possible error: \n0.requests is not an array\n1.requests is an empty array\n2.sessionName is not a string');
         }
         else{
           return requests.every(request => {return isValidRequest(request)});
