@@ -6,8 +6,6 @@ const manager = require('./core/manager');
 const validateOpts = require('./core/validateOpts');
 
 function init(configPath) {
-  const configString = fs.readFileSync(configPath);
-  const opts = JSON.parse(configString);
   try{
     const configString = fs.readFileSync(configPath);
     const opts = JSON.parse(configString);
