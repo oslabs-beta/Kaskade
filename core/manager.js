@@ -16,13 +16,19 @@ async function manager(opts){
       metricsArr.push(runner(opts))
     }
     const result = await Promise.all(metricsArr);
-    // console.log(calculate(result, opts))
     console.log(printResults(calculate(result, opts)));
   }
   else{
     const workerPromises = [];
-    opts.concurrentUsers /= opts.numOfWorkers;
+
+    let concurrentUsersArr = Array(opts.numOfWorkers).fill(Math.floor(opts.concurrentUsers/opts.numOfWorkers));
+    let mod = opts.concurrentUsers % opts.numOfWorkers;
+    for(let i = 0; i < mod; i++){
+      concurrentUsersArr[i]++
+    }
+
     for(let i = 0; i < opts.numOfWorkers; i++){
+      opts.concurrentUsersforworker = concurrentUsersArr[i];
       workerPromises.push(new Promise((resolve, reject) => {
         const worker = new Worker(path.resolve(__dirname, './worker.js'), {workerData: opts});
         worker.on('message', msg => {
