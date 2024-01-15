@@ -1,12 +1,11 @@
 import React from 'react';
-import { Navigate, BrowserRouter, Routes, Route } from 'react-router-dom';
+import Pages from './Pages.jsx';
 
 
 const App = () => {
   return (
     <div>
-      {/* <Pages /> */}
-      <p>Hello World</p>
+      <Pages />
     </div>
   );
 };
