@@ -14,13 +14,6 @@ import React from "react";
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
-// root.render(
-//   <StrictMode>
-//     ///* <Provider store={store}> */
-//       <App />
-//     {/* </Provider> */}
-//   </StrictMode>
-// );
 
 root.render(
     <StrictMode>

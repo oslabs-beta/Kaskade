@@ -7,7 +7,7 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'index.bundle.js',
+        filename: 'bundle.js',
         publicPath: '/',
     },
     mode: "development",
