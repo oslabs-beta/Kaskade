@@ -2,9 +2,10 @@
   "name": "@panda-whale-ptri12/kaskade",
   "version": "1.1.0",
   "description": "",
-  "main": "kaskade.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,8 @@
     "hdr-histogram-percentiles-obj": "^3.0.0",
     "path": "^0.12.7",
     "prettier-bytes": "^1.0.4"
+  },
+  "devDependencies": {
+    "electron": "^28.1.3"
   }
 }
