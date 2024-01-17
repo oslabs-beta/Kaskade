@@ -39,7 +39,6 @@ const App = () => {
             </PageContainer>
         );
     };
-    // return (<><h1>Vite + React</h1></>);
     return (
         <>
             <Router>
