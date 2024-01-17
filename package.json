@@ -2,11 +2,11 @@
   "name": "@panda-whale-ptri12/kaskade",
   "version": "1.1.0",
   "description": "",
-  "main": "kaskade.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=production nodemon server/server.js",
-    "dev": "NODE_ENV=development webpack serve --open"
+    "dev": "NODE_ENV=development webpack serve --open",
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -32,7 +32,8 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
     "react-redux": "^8.1.3",
-    "react-router-dom": "^6.21.2"
+    "react-router-dom": "^6.21.2",
+    "prettier-bytes": "^1.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",
@@ -52,6 +53,8 @@
     "styled-components": "^6.1.8",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "webpack-dev-server": "^4.15.1",
+    "electron": "^28.1.3"
   }
+
 }
