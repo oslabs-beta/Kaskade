@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { BrowserRouter as Router, Routes, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import styled from "styled-components";
 import HeadBar from "./common/HeadBar.jsx"
 import NavBar from "./common/NavBar.jsx"
@@ -39,7 +39,6 @@ const App = () => {
             </PageContainer>
         );
     };
-
     return (
         <>
             <Router>
