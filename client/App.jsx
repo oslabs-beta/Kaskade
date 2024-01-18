@@ -39,7 +39,6 @@ const App = () => {
             </PageContainer>
         );
     };
-
     return (
         <>
             <Router>

@@ -1,0 +1,43 @@
+[{
+    "sessionName": "Kaskade TEST1",
+    "servers": [
+        "localhost:3000"
+    ],
+    "requests": [
+        {
+            "requestName": "Get all users",
+            "url": "/api/getallusers",
+            "method": "GET",
+            "headers": {
+                "Content-type": "application/json"
+            }
+        },
+        {
+            "requestName": "Login",
+            "url": "/api/login",
+            "method": "GET",
+            "body":{"username":"testusername", "password":"testpassword"},
+            "headers": {
+                "Content-type": "application/json"
+            }
+        }
+    ],
+    "history":[
+        {
+            "timestamp":1660926192826,
+            "testDuration": 10,
+            "concurrentUsers": 100,
+            "targetThroughput": 1000,
+            "numOfWorkers":100,
+            "result":{}
+        },
+        {
+            "timestamp":1692412593000,
+            "testDuration": 10,
+            "concurrentUsers": 100,
+            "targetThroughput": 1000,
+            "numOfWorkers":100,
+            "result":{}
+        }
+    ]
+}]
