@@ -2,10 +2,10 @@ import React from "react";
 import { render } from "react-dom";
 import styled from "styled-components";
 
-const OverviewTab = (props) => {
+const Overview = (props) => {
     return (
         <div><p>This is overview tab</p></div>
     )
 }
 
-export default OverviewTab;
+export default Overview;
