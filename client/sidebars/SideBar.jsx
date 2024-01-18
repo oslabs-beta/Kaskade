@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import SessionsSide from "./SessionsSide.jsx"
 import HistorySide from "./HistorySide.jsx"
-import { BrowserRouter as Router, Routes, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 const SideBar = (props) => {
     const SideBarDiv = styled.div`
