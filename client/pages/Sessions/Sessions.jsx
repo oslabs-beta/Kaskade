@@ -3,9 +3,12 @@ import { render } from "react-dom";
 import { useState } from "react";
 import styled from "styled-components";
 import TabBar from "./TabBar.jsx";
-import OverviewTab from "./tabs/OverviewTab.jsx";
+import OverviewTab from "./tabs/Overview/OverviewTab.jsx";
+import RunTab from "./tabs/Run/RunTab.jsx";
+import AuthorizationTab from "./tabs/Authorization/AuthorizationTab.jsx";
+import PreviousResultsTab from "./tabs/PreviousResults/PreviousResultsTab.jsx";
 
-const Sessions = (props) => {
+const Sessions = ({ data }) => {
     const [currentTab, setCurrentTab] = useState("overview");
 
     const SessionsDiv = styled.div`
@@ -16,7 +19,17 @@ const Sessions = (props) => {
     let content;
     if (currentTab === "overview") {
         content = (<OverviewTab />);
-    } else {
+    } 
+    else if (currentTab === "run") {
+        content = (<RunTab />);
+    } 
+    else if (currentTab === "authorization") {
+        content = (<AuthorizationTab />);
+    } 
+    else if (currentTab === "results") {
+        content = (<PreviousResultsTab />);
+    } 
+    else {
         content = (<p>Unknown tab</p>);
     }
 

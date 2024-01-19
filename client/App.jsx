@@ -8,7 +8,7 @@ import SideBar from "./sidebars/SideBar.jsx"
 import History from "./pages/History/History.jsx";
 import Sessions from "./pages/Sessions/Sessions.jsx"
 
-const App = () => {
+const App = ({ data }) => {
 
     const PageContainer = styled.div`
         background-color: #000000;
@@ -46,7 +46,7 @@ const App = () => {
                     <Route path="/" element={<Layout page="home" />} />
 
                     <Route path="/sessions" element={<Layout page="sessions" />}>
-                        <Route path='' element={<Sessions /> } />
+                    <Route path="" element={<Sessions data={data} />} />
                         <Route path=':id' element={<Sessions />} />
                     </Route>
 
