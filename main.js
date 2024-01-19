@@ -1,16 +1,19 @@
-const { app, BrowserWindow, Menu } = require('electron')
-const path = require('node:path')
+import electron from 'electron';
+import { app, BrowserWindow, Menu } from 'electron';
+//check the below import statement
+import path from 'node:path';
 
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      // why does path.join __dirname work?
+      preload: '/Users/joelchristopher/Documents/Codesmith/Collab Work/Kaskade/Kaskade/preload.js'
     }
   })
-
-  win.loadFile('./client/index.html')
+// changed path from "./client/index.html"
+  win.loadFile('./client/dist/assets/index-9wjI2O85.js')
 }
 
 
