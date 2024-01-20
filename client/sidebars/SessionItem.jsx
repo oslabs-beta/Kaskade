@@ -18,17 +18,21 @@ const SessionItem = (props) => {
     if (selectedSessionId == props.session.sessionId) {
         const requests = [];
         for (let i = 0; i < props.session.requests.length; ++i) {
-            requests.push(<div>{props.session.requests[i].requestName}</div>)
+            requests.push(<div><h5>{props.session.requests[i].requestName}</h5></div>)
         }
         return (
             <SelectedDiv onClick={() => { navigate("/sessions/" + props.session.sessionId); }}>
-                {props.session.sessionName}
+                <h4>{props.session.sessionName}</h4>
                 {requests}
             </SelectedDiv>
         );
     } else {
         return (
-            <div onClick={() => { navigate("/sessions/" + props.session.sessionId); }}> {props.session.sessionName} </div>
+            <div onClick={() => { navigate("/sessions/" + props.session.sessionId); }}>
+                <h4>
+                    {props.session.sessionName}
+                </h4>
+            </div>
         );
     }
 };
