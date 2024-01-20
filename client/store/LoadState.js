@@ -24,7 +24,7 @@ const LoadState = () => {
         {
             "requestName": "Login",
             "url": "/api/login",
-            "method": "GET",
+            "method": "POST",
             "body":{"username":"testusername", "password":"testpassword"},
             "headers": {
                 "Content-type": "application/json"

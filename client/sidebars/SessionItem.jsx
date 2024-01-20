@@ -1,40 +1,47 @@
 import React from "react";
-import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import RequestItem from "./RequestItem.jsx";
 
 const SessionItem = (props) => {
     const navigate = useNavigate();
+
+    // The basic styling of the session div.
+    const sessionDivStyle = {
+        paddingLeft: "5px",
+        paddingTop: "2px",
+        paddingBottom: "2px"
+    };
 
     // Decide what is the currently "selected" session.
     const params = useParams();
     const selectedSessionId = params.id;
 
-    const SelectedDiv = styled.div`
-    background-color: red;
-`;
-    console.log("selectedSessionId is: ", selectedSessionId, ", my session Id is: ", props.session.sessionId);
-
+    const requests = [];
     if (selectedSessionId == props.session.sessionId) {
-        const requests = [];
+        // Selected.
+        // 1. Change session div's background.
+        sessionDivStyle.backgroundColor = "rgba(255, 255, 255, 0.2)";
+
+        // 2. Show requests.
         for (let i = 0; i < props.session.requests.length; ++i) {
-            requests.push(<div><h5>{props.session.requests[i].requestName}</h5></div>)
+            requests.push(
+                <RequestItem
+                    request={props.session.requests[i]}
+                    sessionId={props.session.sessionId}
+                    requestId={i}
+                />);
         }
-        return (
-            <SelectedDiv onClick={() => { navigate("/sessions/" + props.session.sessionId); }}>
-                <h4>{props.session.sessionName}</h4>
-                {requests}
-            </SelectedDiv>
-        );
-    } else {
-        return (
-            <div onClick={() => { navigate("/sessions/" + props.session.sessionId); }}>
-                <h4>
-                    {props.session.sessionName}
-                </h4>
-            </div>
-        );
     }
+
+    return (
+        <div>
+            <div style={sessionDivStyle} onClick={() => { navigate("/sessions/" + props.session.sessionId); }}>
+                <h4>{props.session.sessionName}</h4>
+            </div>
+            {requests}
+        </div>
+    );
 };
 
 

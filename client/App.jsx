@@ -7,6 +7,7 @@ import NavBar from "./common/NavBar.jsx"
 import SideBar from "./sidebars/SideBar.jsx"
 import History from "./pages/History/History.jsx";
 import Sessions from "./pages/Sessions/Sessions.jsx"
+import Requests from "./pages/Requests/Requests.jsx"
 
 const App = () => {
 
@@ -48,6 +49,7 @@ const App = () => {
                     <Route path="/sessions" element={<Layout page="sessions" />}>
                         <Route path='' element={<Sessions /> } />
                         <Route path=':id' element={<Sessions />} />
+                        <Route path=':id/:requestId' element={<Requests />} />
                     </Route>
 
                     <Route path="/history" element={<Layout page="history" />}>

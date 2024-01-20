@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import LoadState from "../../../store/LoadState"
 
 const Overview = (props) => {
+    console.log("Overview page.");
     // Check if state is loaded, if not, load it from file.
     const stateLoaded = useSelector((state) => state.overview.isLoaded);
     if (!stateLoaded) {
@@ -16,6 +17,7 @@ const Overview = (props) => {
     // Get the session Id from URL parameters.
     const params = useParams();
     const sessionId = params.id;
+    console.log("Session Id is : ", sessionId);
 
     // Get the overview state of this session.
     const overviewState = useSelector((state) => state.overview.sessions[sessionId]);
