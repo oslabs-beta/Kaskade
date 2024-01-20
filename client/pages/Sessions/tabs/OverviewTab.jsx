@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const OverviewTab = (props) => {
     return (
-        <div><p>This is overview tab</p></div>
+        <div><p>This is the Overview tab</p></div>
     )
 }
 
