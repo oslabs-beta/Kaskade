@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const Overview = (props) => {
+const OverviewTab = (props) => {
     console.log("Overview page.");
 
     // Get the session Id from URL parameters.
@@ -66,4 +66,4 @@ const Overview = (props) => {
     )
 }
 
-export default Overview;
+export default OverviewTab;
