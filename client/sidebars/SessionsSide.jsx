@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import LoadState from "../store/LoadState.js";
 import SessionItem from "./SessionItem.jsx";
 
 const SessionsSide = () => {

@@ -3,7 +3,6 @@ import { render } from "react-dom";
 import styled from "styled-components";
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import LoadState from "../../../store/LoadState"
 
 const Overview = (props) => {
     console.log("Overview page.");
