@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import LoadState from "../store/LoadState.js";
 import SessionItem from "./SessionItem.jsx";
 
 const SessionsSide = () => {
+    const datafile = useSelector((state) => state.data.datafile);
+    console.log("Current datafile from datafile:", datafile);
+
     const sessionState = useSelector((state) => state.session);
     if (sessionState.isLoaded === false) {
         LoadState();
         return;
     }
+
     const SessionsSideDiv = styled.div`
         display:flex;
         flex-direction: column;

@@ -9,7 +9,7 @@ import History from "./pages/History/History.jsx";
 import Sessions from "./pages/Sessions/Sessions.jsx"
 import Requests from "./pages/Requests/Requests.jsx"
 
-const App = () => {
+const App = (props) => {
 
     const PageContainer = styled.div`
         background-color: #000000;
@@ -47,7 +47,7 @@ const App = () => {
                     <Route path="/" element={<Layout page="home" />} />
 
                     <Route path="/sessions" element={<Layout page="sessions" />}>
-                        <Route path='' element={<Sessions /> } />
+                    <Route path="" element={<Sessions />} />
                         <Route path=':id' element={<Sessions />} />
                         <Route path=':id/:requestId' element={<Requests />} />
                     </Route>
