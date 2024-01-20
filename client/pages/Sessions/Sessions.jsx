@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { useState } from "react";
 import styled from "styled-components";
 import TabBar from "./TabBar.jsx";
-import OverviewTab from "./tabs/OverviewTab.jsx";
+import Overview from "./tabs/Overview.jsx";
 import RunTab from "./tabs/RunTab.jsx";
 import AuthorizationTab from "./tabs/AuthorizationTab.jsx";
 import PreviousResultsTab from "./tabs/PreviousResultsTab.jsx";
@@ -18,7 +18,7 @@ const Sessions = () => {
     // Render the tab based on which tab is currently selected.
     let content;
     if (currentTab === "overview") {
-        content = (<OverviewTab />);
+        content = (<Overview />);
     } 
     else if (currentTab === "run") {
         content = (<RunTab />);

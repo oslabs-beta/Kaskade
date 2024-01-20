@@ -5,14 +5,7 @@ import LoadState from "../store/LoadState.js";
 import SessionItem from "./SessionItem.jsx";
 
 const SessionsSide = () => {
-    const datafile = useSelector((state) => state.data.datafile);
-    console.log("Current datafile from datafile:", datafile);
-
-    const sessionState = useSelector((state) => state.session);
-    if (sessionState.isLoaded === false) {
-        LoadState();
-        return;
-    }
+    const sessionState = useSelector((state) => state.data.datafile);
 
     const SessionsSideDiv = styled.div`
         display:flex;
@@ -20,8 +13,8 @@ const SessionsSide = () => {
     `;
 
     const sessions = [];
-    for (let i = 0; i < sessionState.sessions.length; i++) {
-        sessions.push(<SessionItem session={sessionState.sessions[i]} />)
+    for (let i = 0; i < sessionState.length; i++) {
+        sessions.push(<SessionItem session={sessionState[i]} />)
     }
     return (
         <SessionsSideDiv>

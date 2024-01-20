@@ -7,21 +7,22 @@ import LoadState from "../../../store/LoadState"
 
 const Overview = (props) => {
     console.log("Overview page.");
-    // Check if state is loaded, if not, load it from file.
-    const stateLoaded = useSelector((state) => state.overview.isLoaded);
-    if (!stateLoaded) {
-        LoadState();
-        return;
-    }
 
     // Get the session Id from URL parameters.
     const params = useParams();
     const sessionId = params.id;
     console.log("Session Id is : ", sessionId);
 
-    // Get the overview state of this session.
-    const overviewState = useSelector((state) => state.overview.sessions[sessionId]);
-    console.log("Overview State: " + overviewState)
+    // Get the state of this session.
+    const overviewState = useSelector((state) => {
+        for (let i = 0; i < state.data.datafile.length; i++) {
+            if (state.data.datafile[i].sessionId == sessionId) {
+                return state.data.datafile[i];
+            }
+        }
+        return null;
+    });
+    console.log("Overview State: ", overviewState)
 
     if (!overviewState) {
         return (
