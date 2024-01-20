@@ -1,6 +1,6 @@
 const AuthorizationTab = (props) => {
     return (
-        <div><p>This is Authorization tab</p></div>
+        <div><p>This is the Authorization tab</p></div>
     )
 }
 

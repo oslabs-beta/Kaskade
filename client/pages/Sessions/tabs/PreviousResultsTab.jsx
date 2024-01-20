@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const PreviousResultsTab = (props) => {
     return (
-        <div><p>This is Previous Results tab</p></div>
+        <div><p>This is the Previous Results tab</p></div>
     )
 }
 
