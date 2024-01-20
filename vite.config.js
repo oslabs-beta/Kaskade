@@ -15,13 +15,13 @@ export default defineConfig({
       preload: {
         // Shortcut of `build.rollupOptions.input`.
         // Preload scripts may contain Web assets, so use the `build.rollupOptions.input` instead `build.lib.entry`.
-        input: path.join(__dirname, 'preload.js'),
+        // input: path.join(__dirname, 'preload.js'),
+        input: 'preload.js'
       },
       // Ployfill the Electron and Node.js built-in modules for Renderer process.
       // See 👉 https://github.com/electron-vite/vite-plugin-electron-renderer
       renderer: {},
     }),
   ],
-  root: 'client/'
-
+  root: 'client'
 })
