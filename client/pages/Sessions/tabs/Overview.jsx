@@ -3,9 +3,16 @@ import { render } from "react-dom";
 import styled from "styled-components";
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
+import LoadState from "../../../store/LoadState"
 
 const Overview = (props) => {
+    // Check if state is loaded, if not, load it from file.
+    const stateLoaded = useSelector((state) => state.overview.isLoaded);
+    if (!stateLoaded) {
+        LoadState();
+        return;
+    }
+
     // Get the session Id from URL parameters.
     const params = useParams();
     const sessionId = params.id;
