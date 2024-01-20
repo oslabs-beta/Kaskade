@@ -3,10 +3,6 @@
     "servers": [
         "localhost:3000"
     ],
-    "testDuration": 600,
-    "concurrentUsers": 5,
-    "targetThroughput": 1000,
-    "numOfWorkers": 1,
     "requests": [
         {
             "requestName": "Get all users",
