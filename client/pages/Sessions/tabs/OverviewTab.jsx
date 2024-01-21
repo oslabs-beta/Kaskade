@@ -31,37 +31,51 @@ const OverviewTab = (props) => {
 
     // Render the page.
     const OverviewDiv = styled.div`
+        margin-top: 20px;
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
     `;
+
+    const LeftDiv = styled.div`
+        width: 50%
+        display:flex;
+        flex-direction: column;
+    `
+
+    const RightDiv = styled.div`
+        width: 30%
+        display:flex;
+        flex-direction: column;
+    `
 
     return (
         <OverviewDiv>
-            <div>
+            <LeftDiv>
                 <div>
-                    <label>{overviewState.name}</label>
+                    <h2>{overviewState.sessionName}</h2>
                 </div>
                 <div>
-                    <input type="text" value={overviewState.overview} readonly />
+                    <input type="text" value={overviewState.overview} readOnly />
                 </div>
                 <div>
-                    <button>Run</button>
+                    <button onClick={() => { props.setCurrentTab("run"); }}>Run</button>
                 </div>
-            </div>
-            <div>
+            </LeftDiv>
+            <RightDiv>
                 <div>
                     <label>Created By: </label>
                     <label>{overviewState.createdBy}</label>
                 </div>
                 <div>
                     <label>Created On: </label>
-                    <label>{overviewState.createdOn}</label>
+                    <label>{new Date(overviewState.createdOn).toLocaleString()}</label>
                 </div>
                 <div>
                     <label>Last Modified:</label>
-                    <label>{overviewState.lastModified}</label>
+                    <label>{new Date(overviewState.lastModified).toLocaleString()}</label>
                 </div>
-            </div>
+            </RightDiv>
         </OverviewDiv>
     )
 }
