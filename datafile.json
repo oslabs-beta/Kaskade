@@ -1,7 +1,7 @@
 [{
     "sessionId": 1,
     "sessionName": "Kaskade TEST1",
-    "overview": "This is a test session. Kaskade is great!\n",
+    "overview": "This is a test session.\nKaskade is great!\n",
     "createdBy": "Alice",
     "createdOn": 1705797900000,
     "lastModified": 1705798050000,
@@ -249,7 +249,7 @@
 {
   "sessionId": 2,
   "sessionName": "Kaskade TEST2",
-  "overview": "This is a second test session.\n",
+  "overview": "This is a second test session.\nTest\n",
   "createdBy": "Alice",
   "createdOn": 1705798537000,
   "lastModified": 1705798573000,

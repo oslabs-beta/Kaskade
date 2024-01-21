@@ -55,8 +55,8 @@ const OverviewTab = (props) => {
                 <div>
                     <h2>{overviewState.sessionName}</h2>
                 </div>
-                <div>
-                    <input type="text" value={overviewState.overview} readOnly />
+                <div style={{whiteSpace : "pre-wrap"}}>
+                    {overviewState.overview}
                 </div>
                 <div>
                     <button onClick={() => { props.setCurrentTab("run"); }}>Run</button>
