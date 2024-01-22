@@ -20,8 +20,10 @@ const SessionItem = (props) => {
     const requests = [];
     if (selectedSessionId == props.session.sessionId) {
         // Selected.
-        // 1. Change session div's background.
-        sessionDivStyle.backgroundColor = "rgba(255, 255, 255, 0.2)";
+        // 1. Highlight the session div if we don't select any request in it.
+        if (!params.requestId) {
+            sessionDivStyle.backgroundColor = "rgba(255, 255, 255, 0.2)";
+        }
 
         // 2. Show requests.
         for (let i = 0; i < props.session.requests.length; ++i) {
