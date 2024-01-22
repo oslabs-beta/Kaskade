@@ -1,4 +1,5 @@
 [{
+    "sessionId": 1,
     "sessionName": "Kaskade TEST1",
     "servers": [
         "localhost:3000"
@@ -15,7 +16,7 @@
         {
             "requestName": "Login",
             "url": "/api/login",
-            "method": "GET",
+            "method": "POST",
             "body":{"username":"testusername", "password":"testpassword"},
             "headers": {
                 "Content-type": "application/json"
@@ -240,4 +241,21 @@
             }
         }
     ]
+},
+{
+  "sessionId": 2,
+  "sessionName": "Kaskade TEST2",
+  "servers": [
+      "localhost:3000"
+  ],
+  "requests": [
+      {
+          "requestName": "Get all users",
+          "url": "/api/getallusers",
+          "method": "GET",
+          "headers": {
+              "Content-type": "application/json"
+          }
+      }
+  ]
 }]
