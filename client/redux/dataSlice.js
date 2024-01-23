@@ -29,8 +29,18 @@ const dataSlice = createSlice({
         state.datafile[0] = updatedData;
       }
     },
+    createSession: (state, action) => {
+      const newSession = {};
+      newSession.sessionId = Date.now();
+      newSession.sessionName = "New Session";
+      newSession.requests = [];
+      newSession.createdOn = newSession.sessionId;
+      newSession.lastModified = newSession.sessionId;
+      state.datafile.push(newSession);
+      console.log('enter reducer');
+    },
   },
 });
 
-export const { setData, setRunTabData } = dataSlice.actions;
+export const { setData, setRunTabData, createSession } = dataSlice.actions;
 export default dataSlice.reducer;
