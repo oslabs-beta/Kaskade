@@ -1,7 +1,6 @@
-import React from "react";
-import { render } from "react-dom";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useParams, useNavigate } from 'react-router-dom';
 import TabBar from "./SessionsTabBar.jsx";
 import OverviewTab from "./tabs/OverviewTab.jsx";
 import RunTab from "./tabs/RunTab.jsx";
@@ -10,6 +9,17 @@ import PreviousResultsTab from "./tabs/PreviousResultsTab.jsx";
 
 const Sessions = () => {
     const [currentTab, setCurrentTab] = useState("overview");
+    const { id } = useParams();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // Update the tab based on the selected session ID
+        if (id) {
+            setCurrentTab("run");
+        } else {
+            setCurrentTab("overview");
+        }
+    }, [id]);
 
     const SessionsDiv = styled.div`
         padding: 50px;

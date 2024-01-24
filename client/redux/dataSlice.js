@@ -29,8 +29,11 @@ const dataSlice = createSlice({
         state.datafile[0] = updatedData;
       }
     },
+    currentSessionConfig: (state, action) => {
+      state.configFile = action.payload
+    },
   },
 });
 
-export const { setData, setRunTabData } = dataSlice.actions;
+export const { setData, setRunTabData, currentSessionConfig } = dataSlice.actions;
 export default dataSlice.reducer;
