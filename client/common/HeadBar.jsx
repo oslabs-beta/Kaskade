@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import path from 'node:path';
 
 const HeadBar = () => {
     const HeadBarContainer = styled.div`
@@ -10,7 +11,7 @@ const HeadBar = () => {
         border-bottom-color: #535353;
         border-bottom-with: 2px;
     `;
-
+    
     return (
         <HeadBarContainer>
             <p>KASKADE</p>
