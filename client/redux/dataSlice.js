@@ -38,9 +38,9 @@ const dataSlice = createSlice({
       newSession.createdOn = newSession.sessionId;
       newSession.lastModified = newSession.sessionId;
       state.datafile.push(newSession);
-      console.log('enter reducer');
-
-      // fs.WriteFileSync("../../datafile.json", JSON.stringify(state.datafile))
+    
+      // call main process to write data file
+      window.electronAPI.writeDataFile(JSON.stringify(state.datafile));
     },
   },
 });

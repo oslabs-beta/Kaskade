@@ -19,7 +19,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import store from './redux/store';
 import { setData } from './redux/dataSlice';
-import data from './../datafile.json';
+// import data from './../datafile.json';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -27,8 +27,10 @@ import '@fontsource/roboto/700.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
+// send an ipc to main process to read datafile
+const data = await window.electronAPI.readDataFile();
 // Dispatch the setData action to populate the initial state with datafile.json
-store.dispatch(setData(data));
+store.dispatch(setData(JSON.parse(data)));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const darkTheme = createTheme({
