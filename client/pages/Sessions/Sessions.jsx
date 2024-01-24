@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import { useState } from "react";
 import styled from "styled-components";
-import TabBar from "./TabBar.jsx";
+import TabBar from "./SessionsTabBar.jsx";
 import OverviewTab from "./tabs/OverviewTab.jsx";
 import RunTab from "./tabs/RunTab.jsx";
 import AuthorizationTab from "./tabs/AuthorizationTab.jsx";
