@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { flushSync } from 'react-dom';
 
 const initialState = {
   data: [], // Initial state that'll be updated to action payload (datafile)
@@ -38,6 +39,8 @@ const dataSlice = createSlice({
       newSession.lastModified = newSession.sessionId;
       state.datafile.push(newSession);
       console.log('enter reducer');
+
+      // fs.WriteFileSync("../../datafile.json", JSON.stringify(state.datafile))
     },
   },
 });

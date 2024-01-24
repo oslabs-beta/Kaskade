@@ -6,6 +6,9 @@ import Button from '@mui/material/Button';
 import { createSession } from '../redux/dataSlice';
 import AddIcon from '@mui/icons-material/Add';
 
+
+
+
 const SessionsSide = () => {
     const dispatch = useDispatch();
     const sessionState = useSelector((state) => state.data.datafile);
@@ -22,8 +25,14 @@ const SessionsSide = () => {
 
     function handleNewSession(){
         console.log("enter handle");
+        // let remote = require('electron').remote;
+        // console.log("a");
+        // let electronFs = remote.require('fs');
+        // console.log("b");
+        // fs.writeFileSync(path.join(__dirname, "./test.json"), "hahaha");
+        // console.log("c");
+
         dispatch(createSession());
-    
     }
     return (
         <SessionsSideDiv>
