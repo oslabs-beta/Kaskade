@@ -1,5 +1,5 @@
 node_modules
-.env
 client/dist
 dist-electron
 package-lock.json
+kaskadetest-electron.js
