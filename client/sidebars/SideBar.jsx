@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 const SideBar = (props) => {
     const SideBarDiv = styled.div`
         background-color: #2A2828;
-        width: 20%;
+        width: 300px;
         border-right-style: solid;
         border-right-color: #535353;
         border-right-with: 2px;

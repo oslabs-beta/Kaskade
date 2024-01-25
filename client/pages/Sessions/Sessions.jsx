@@ -18,8 +18,8 @@ const Sessions = () => {
     // Render the tab based on which tab is currently selected.
     let content;
     if (currentTab === "overview") {
-        content = (<OverviewTab />);
-    } 
+        content = (<OverviewTab setCurrentTab={setCurrentTab} />);
+    }
     else if (currentTab === "run") {
         content = (<RunTab />);
     } 

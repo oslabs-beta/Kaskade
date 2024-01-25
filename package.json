@@ -23,6 +23,11 @@
   },
   "homepage": "https://github.com/oslabs-beta/Kaskade#readme",
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/icons-material": "^5.15.5",
+    "@mui/material": "^5.15.5",
     "@reduxjs/toolkit": "^2.0.1",
     "cli-progress": "^3.12.0",
     "cli-table3": "^0.6.3",
