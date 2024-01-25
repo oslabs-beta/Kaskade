@@ -61,7 +61,6 @@ const OverviewTab = (props) => {
                 </div>
                 <div>
                     <button onClick={() => { props.setCurrentTab("run"); }}>Run</button>
-                    <button onClick={() => { navigate("/result/" + sessionId + "/" + 1660926192826 )}}>Result</button>
                 </div>
             </LeftDiv>
             <RightDiv>

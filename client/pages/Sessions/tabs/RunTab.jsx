@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setRunTabData } from "../../../redux/dataSlice";
+import { useParams, useNavigate } from 'react-router-dom';
 
 const RunTab = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const params = useParams();
+  const sessionId = params.id;
   // const datafile = useSelector((state) => state.data.datafile);
   const configFile = useSelector((state) => state.data.configFile);
 
@@ -103,6 +107,7 @@ const RunTab = () => {
         <br />
       </form>
         <button type="button" onClick={handleRunButton}>Run</button>
+        <button onClick={() => { navigate("/result/" + sessionId + "/" + 1660926192826 )}}>Result</button>
     </div>
   );
 };
