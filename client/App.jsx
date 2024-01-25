@@ -31,7 +31,7 @@ const App = (props) => {
             <PageContainer>
                 <HeadBar />
                 <MainContainer>
-                    <NavBar />
+                    <NavBar page={props.page}/>
                     <SideBar page={props.page} />
                     <OutletContainer>
                         <Outlet />

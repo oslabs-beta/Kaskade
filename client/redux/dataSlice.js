@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { flushSync } from 'react-dom';
 
 const initialState = {
   data: [], // Initial state that'll be updated to action payload (datafile)
@@ -29,8 +30,20 @@ const dataSlice = createSlice({
         state.datafile[0] = updatedData;
       }
     },
+    createSession: (state, action) => {
+      const newSession = {};
+      newSession.sessionId = Date.now();
+      newSession.sessionName = "New Session";
+      newSession.requests = [];
+      newSession.createdOn = newSession.sessionId;
+      newSession.lastModified = newSession.sessionId;
+      state.datafile.push(newSession);
+    
+      // call main process to write data file
+      window.electronAPI.writeDataFile(JSON.stringify(state.datafile));
+    },
   },
 });
 
-export const { setData, setRunTabData } = dataSlice.actions;
+export const { setData, setRunTabData, createSession } = dataSlice.actions;
 export default dataSlice.reducer;
