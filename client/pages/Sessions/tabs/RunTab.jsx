@@ -1,38 +1,60 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setRunTabData } from "../../../redux/dataSlice";
+import { useParams, useNavigate } from 'react-router-dom';
+
 const result = await window.electronAPI.kaskadestart();
 console.log('RESULT: ', result)
+
 const RunTab = () => {
   const dispatch = useDispatch();
-  const datafile = useSelector((state) => state.data.datafile);
+  const navigate = useNavigate();
+  const params = useParams();
+  const sessionId = params.id;
+  // const datafile = useSelector((state) => state.data.datafile);
+  const configFile = useSelector((state) => state.data.configFile);
 
-  const {
-    servers = [],
-    testDuration = 0,
-    concurrentUsers = 0,
-    numOfWorkers = 0,
-  } = datafile && datafile.length > 0 ? datafile[0] : {};
+  // console.log("Current configFile on Runtab:", configFile);
+
 
   // State to manage input values
-  const [serverInput, setServerInput] = useState(servers.join(', '));
-  const [testDurationInput, setTestDurationInput] = useState(testDuration);
-  const [concurrentUsersInput, setConcurrentUsersInput] = useState(concurrentUsers);
-  const [numOfWorkersInput, setNumOfWorkersInput] = useState(numOfWorkers);
+  const [serverInput, setServerInput] = useState([]);
+  const [testDurationInput, setTestDurationInput] = useState(0);
+  const [concurrentUsersInput, setConcurrentUsersInput] = useState(0);
+  const [numOfWorkersInput, setNumOfWorkersInput] = useState(0);
+  const [updatedConfig, setUpdatedConfig] = useState(configFile);
 
-  // Function to handle input changes and update Redux store
+
   const handleInputChange = (inputName, inputValue) => {
-    dispatch(
-      setRunTabData({
-        servers: inputName === "servers" ? inputValue.split(',').map(item => item.trim()) : servers,
-        testDuration: inputName === "testDuration" ? parseInt(inputValue) : testDuration,
-        concurrentUsers: inputName === "concurrentUsers" ? parseInt(inputValue) : concurrentUsers,
-        numOfWorkers: inputName === "numOfWorkers" ? parseInt(inputValue) : numOfWorkers,
-      })
-    );
+    const updatedConfigCopy = { ...updatedConfig };
+
+    if (inputName === "servers") {
+      updatedConfigCopy.servers = inputValue.split(',').map(item => item.trim());
+    } else {
+      updatedConfigCopy[inputName] = parseInt(inputValue);
+    }
+
+    setUpdatedConfig(updatedConfigCopy);
   };
 
-  console.log("Current datafile from datafile:", datafile);
+  // console.log("updatedConfig: ", updatedConfig)
+
+  const handleRunButton = () =>{
+    //primative check to make sure the user filled out the config inputs. handler function will not execute 
+    //if user doesn't fill out expected parameters
+    if (
+      updatedConfig.testDuration === 0 ||
+      updatedConfig.concurrentUsers === 0 ||
+      updatedConfig.numOfWorkers === 0
+      ) {
+        return;
+      }
+      
+      
+      //updatedConfig state is an object that should be able to be passed as our existing configFile format
+    console.log("updatedConfig to pass to core logic: ", updatedConfig)
+  }
+
 
   return (
     <div>
@@ -87,7 +109,8 @@ const RunTab = () => {
         </label>
         <br />
       </form>
-        <button type="button">Run</button>
+        <button type="button" onClick={handleRunButton}>Run</button>
+        <button onClick={() => { navigate("/result/" + sessionId + "/" + 1660926192826 )}}>Result</button>
     </div>
   );
 };
