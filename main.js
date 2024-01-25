@@ -1,5 +1,6 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import path from 'node:path'
+import fs from 'node:fs'
 
 process.env.DIST = path.join(__dirname, 'dist')
 process.env.VITE_PUBLIC = app.isPackaged ? process.env.DIST : path.join(process.env.DIST, '../public')
@@ -10,6 +11,12 @@ let win;
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
 
 function createWindow() {
+  ipcMain.handle('read-data-file', () => {
+    return fs.readFileSync(path.join(__dirname, "../datafile.json"), "utf8"); 
+  })
+  ipcMain.on('write-data-file', (event, content) => {
+      fs.writeFileSync(path.join(__dirname, "../datafile.json"), content);
+  })
   win = new BrowserWindow({
     // icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
     webPreferences: {

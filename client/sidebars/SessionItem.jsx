@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { currentSessionConfig } from '../redux/dataSlice';
 import RequestItem from "./RequestItem.jsx";
 
+
 const SessionItem = (props) => {
     // console.log("SessionItem State called props.session: ", props.session)
     const dispatch = useDispatch();
@@ -26,10 +27,12 @@ const SessionItem = (props) => {
     const requests = [];
     if (selectedSessionId == props.session.sessionId) {
         // Selected.
-        // 1. Change session div's background.
-        sessionDivStyle.backgroundColor = "rgba(255, 255, 255, 0.2)";
+        // 1. Highlight the session div if we don't select any request in it.
+        if (!params.requestId) {
+            sessionDivStyle.backgroundColor = "rgba(255, 255, 255, 0.2)";
         
         dispatch(currentSessionConfig(props.session));
+        }
 
         // 2. Show requests.
         for (let i = 0; i < props.session.requests.length; ++i) {
