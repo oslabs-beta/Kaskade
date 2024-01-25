@@ -1,11 +1,17 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { currentSessionConfig } from '../redux/dataSlice';
 import RequestItem from "./RequestItem.jsx";
 
 
 const SessionItem = (props) => {
+    // console.log("SessionItem State called props.session: ", props.session)
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    // dipatch(currentSessionConfig(props.session))
 
     // The basic styling of the session div.
     const sessionDivStyle = {
@@ -24,6 +30,8 @@ const SessionItem = (props) => {
         // 1. Highlight the session div if we don't select any request in it.
         if (!params.requestId) {
             sessionDivStyle.backgroundColor = "rgba(255, 255, 255, 0.2)";
+        
+        dispatch(currentSessionConfig(props.session));
         }
 
         // 2. Show requests.

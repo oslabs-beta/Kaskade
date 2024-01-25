@@ -10,6 +10,7 @@ const SessionsSide = () => {
     const dispatch = useDispatch();
     const sessionState = useSelector((state) => state.data.datafile);
 
+    console.log("SessionsSide sessionState: ", sessionState)
     const SessionsSideDiv = styled.div`
         display:flex;
         flex-direction: column;

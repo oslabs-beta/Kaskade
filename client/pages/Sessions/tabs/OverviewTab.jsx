@@ -5,12 +5,12 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const OverviewTab = (props) => {
-    console.log("Overview page.");
+    // console.log("Overview page.");
 
     // Get the session Id from URL parameters.
     const params = useParams();
     const sessionId = params.id;
-    console.log("Session Id is : ", sessionId);
+    // console.log("Session Id is : ", sessionId);
 
     // Get the state of this session.
     const overviewState = useSelector((state) => {
@@ -21,7 +21,7 @@ const OverviewTab = (props) => {
         }
         return null;
     });
-    console.log("Overview State: ", overviewState)
+    // console.log("Overview State: ", overviewState)
 
     if (!overviewState) {
         return (

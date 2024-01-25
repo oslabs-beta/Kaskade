@@ -30,6 +30,9 @@ const dataSlice = createSlice({
         state.datafile[0] = updatedData;
       }
     },
+    currentSessionConfig: (state, action) => {
+      state.configFile = action.payload
+    },
     createSession: (state, action) => {
       const newSession = {};
       newSession.sessionId = Date.now();
@@ -45,5 +48,5 @@ const dataSlice = createSlice({
   },
 });
 
-export const { setData, setRunTabData, createSession } = dataSlice.actions;
+export const { setData, setRunTabData, currentSessionConfig, createSession } = dataSlice.actions;
 export default dataSlice.reducer;
