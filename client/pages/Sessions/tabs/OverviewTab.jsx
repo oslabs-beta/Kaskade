@@ -1,11 +1,12 @@
 import React from "react";
 import { render } from "react-dom";
 import styled from "styled-components";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const OverviewTab = (props) => {
     console.log("Overview page.");
+    const navigate = useNavigate();
 
     // Get the session Id from URL parameters.
     const params = useParams();
@@ -60,6 +61,7 @@ const OverviewTab = (props) => {
                 </div>
                 <div>
                     <button onClick={() => { props.setCurrentTab("run"); }}>Run</button>
+                    <button onClick={() => { navigate("/result/" + sessionId + "/" + 1660926192826 )}}>Result</button>
                 </div>
             </LeftDiv>
             <RightDiv>
