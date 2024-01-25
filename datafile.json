@@ -1,1 +1,276 @@
-[{"sessionId":1,"sessionName":"Kaskade TEST1","overview":"This is a test session.\nKaskade is great!\n","createdBy":"Alice","createdOn":1705797900000,"lastModified":1705798050000,"servers":["localhost:3000"],"requests":[{"requestName":"Get all users","url":"/api/getallusers","method":"GET","headers":{"Content-type":"application/json"}},{"requestName":"Login","url":"/api/login","method":"POST","body":{"username":"testusername","password":"testpassword"},"headers":{"Content-type":"application/json"}}],"history":[{"timestamp":1660926192826,"testDuration":10,"concurrentUsers":100,"targetThroughput":1000,"numOfWorkers":100,"result":{"latencyStats":{"s0_r0":{"average":11,"mean":11,"stddev":10.31,"min":1,"max":30,"total":8,"p0_001":1,"p0_01":1,"p0_1":1,"p1":1,"p2_5":1,"p10":1,"p25":2,"p50":3,"p75":20,"p90":30,"p97_5":30,"p99":30,"p99_9":30,"p99_99":30,"p99_999":30},"s0_r1":{"average":11,"mean":11,"stddev":10.31,"min":1,"max":30,"total":8,"p0_001":1,"p0_01":1,"p0_1":1,"p1":1,"p2_5":1,"p10":1,"p25":2,"p50":3,"p75":20,"p90":30,"p97_5":30,"p99":30,"p99_9":30,"p99_99":30,"p99_999":30}},"averagRequestThroughput":2.4,"averageByteThroughput":36,"requestThroughputStats":{"average":2.4,"mean":2.4,"stddev":2.16,"min":1,"max":8,"total":10,"p0_001":0,"p0_01":0,"p0_1":0,"p1":0,"p2_5":0,"p10":0,"p25":1,"p50":2,"p75":3,"p90":4,"p97_5":8,"p99":8,"p99_9":8,"p99_99":8,"p99_999":8},"byteThroughputStats":{"average":36,"mean":36,"stddev":27.28,"min":10,"max":90,"total":10,"p0_001":0,"p0_01":0,"p0_1":0,"p1":0,"p2_5":0,"p10":0,"p25":20,"p50":30,"p75":40,"p90":80,"p97_5":90,"p99":90,"p99_9":90,"p99_99":90,"p99_999":90}}},{"timestamp":1692412593000,"testDuration":20,"concurrentUsers":200,"targetThroughput":2000,"numOfWorkers":200,"result":{"latencyStats":{"s0_r0":{"average":11,"mean":11,"stddev":10.31,"min":1,"max":30,"total":8,"p0_001":1,"p0_01":1,"p0_1":1,"p1":1,"p2_5":1,"p10":1,"p25":2,"p50":3,"p75":20,"p90":30,"p97_5":30,"p99":30,"p99_9":30,"p99_99":30,"p99_999":30},"s0_r1":{"average":11,"mean":11,"stddev":10.31,"min":1,"max":30,"total":8,"p0_001":1,"p0_01":1,"p0_1":1,"p1":1,"p2_5":1,"p10":1,"p25":2,"p50":3,"p75":20,"p90":30,"p97_5":30,"p99":30,"p99_9":30,"p99_99":30,"p99_999":30}},"averagRequestThroughput":4.8,"averageByteThroughput":72,"requestThroughputStats":{"average":2.4,"mean":2.4,"stddev":2.16,"min":1,"max":8,"total":10,"p0_001":0,"p0_01":0,"p0_1":0,"p1":0,"p2_5":0,"p10":0,"p25":1,"p50":2,"p75":3,"p90":4,"p97_5":8,"p99":8,"p99_9":8,"p99_99":8,"p99_999":8},"byteThroughputStats":{"average":36,"mean":36,"stddev":27.28,"min":10,"max":90,"total":10,"p0_001":0,"p0_01":0,"p0_1":0,"p1":0,"p2_5":0,"p10":0,"p25":20,"p50":30,"p75":40,"p90":80,"p97_5":90,"p99":90,"p99_9":90,"p99_99":90,"p99_999":90}}}]},{"sessionId":2,"sessionName":"Kaskade TEST2","overview":"This is a second test session.\nTest\n","createdBy":"Alice","createdOn":1705798537000,"lastModified":1705798573000,"servers":["localhost:3000"],"requests":[{"requestName":"Get all users","url":"/api/getallusers","method":"GET","headers":{"Content-type":"application/json"}}],"history":[]},{"sessionId":1706145287438,"sessionName":"New Session","requests":[],"createdOn":1706145287438,"lastModified":1706145287438}]
+[
+    {
+        "sessionId": 1,
+        "sessionName": "Kaskade TEST1",
+        "overview": "This is a test session.\nKaskade is great!\n",
+        "createdBy": "Alice",
+        "createdOn": 1705797900000,
+        "lastModified": 1705798050000,
+        "servers": [
+            "localhost:3000"
+        ],
+        "requests": [
+            {
+                "requestName": "Get all users",
+                "url": "/api/getallusers",
+                "method": "GET",
+                "headers": {
+                    "Content-type": "application/json"
+                }
+            },
+            {
+                "requestName": "Login",
+                "url": "/api/login",
+                "method": "POST",
+                "body": {
+                    "username": "testusername",
+                    "password": "testpassword"
+                },
+                "headers": {
+                    "Content-type": "application/json"
+                }
+            }
+        ],
+        "history": [
+            {
+                "timestamp": 1660926192826,
+                "testDuration": 10,
+                "concurrentUsers": 100,
+                "targetThroughput": 1000,
+                "numOfWorkers": 100,
+                "result": {
+                    "latencyStats": {
+                        "s0_r0": {
+                            "average": 11,
+                            "mean": 11,
+                            "stddev": 10.31,
+                            "min": 1,
+                            "max": 30,
+                            "total": 8,
+                            "p0_001": 1,
+                            "p0_01": 1,
+                            "p0_1": 1,
+                            "p1": 1,
+                            "p2_5": 1,
+                            "p10": 1,
+                            "p25": 2,
+                            "p50": 3,
+                            "p75": 20,
+                            "p90": 30,
+                            "p97_5": 30,
+                            "p99": 30,
+                            "p99_9": 30,
+                            "p99_99": 30,
+                            "p99_999": 30
+                        },
+                        "s0_r1": {
+                            "average": 11,
+                            "mean": 11,
+                            "stddev": 10.31,
+                            "min": 1,
+                            "max": 30,
+                            "total": 8,
+                            "p0_001": 1,
+                            "p0_01": 1,
+                            "p0_1": 1,
+                            "p1": 1,
+                            "p2_5": 1,
+                            "p10": 1,
+                            "p25": 2,
+                            "p50": 3,
+                            "p75": 20,
+                            "p90": 30,
+                            "p97_5": 30,
+                            "p99": 30,
+                            "p99_9": 30,
+                            "p99_99": 30,
+                            "p99_999": 30
+                        }
+                    },
+                    "averagRequestThroughput": 2.4,
+                    "averageByteThroughput": 36,
+                    "requestThroughputStats": {
+                        "average": 2.4,
+                        "mean": 2.4,
+                        "stddev": 2.16,
+                        "min": 1,
+                        "max": 8,
+                        "total": 10,
+                        "p0_001": 0,
+                        "p0_01": 0,
+                        "p0_1": 0,
+                        "p1": 0,
+                        "p2_5": 0,
+                        "p10": 0,
+                        "p25": 1,
+                        "p50": 2,
+                        "p75": 3,
+                        "p90": 4,
+                        "p97_5": 8,
+                        "p99": 8,
+                        "p99_9": 8,
+                        "p99_99": 8,
+                        "p99_999": 8
+                    },
+                    "byteThroughputStats": {
+                        "average": 36,
+                        "mean": 36,
+                        "stddev": 27.28,
+                        "min": 10,
+                        "max": 90,
+                        "total": 10,
+                        "p0_001": 0,
+                        "p0_01": 0,
+                        "p0_1": 0,
+                        "p1": 0,
+                        "p2_5": 0,
+                        "p10": 0,
+                        "p25": 20,
+                        "p50": 30,
+                        "p75": 40,
+                        "p90": 80,
+                        "p97_5": 90,
+                        "p99": 90,
+                        "p99_9": 90,
+                        "p99_99": 90,
+                        "p99_999": 90
+                    }
+                }
+            },
+            {
+                "timestamp": 1692412593000,
+                "testDuration": 20,
+                "concurrentUsers": 200,
+                "targetThroughput": 2000,
+                "numOfWorkers": 200,
+                "result": {
+                    "latencyStats": {
+                        "s0_r0": {
+                            "average": 11,
+                            "mean": 11,
+                            "stddev": 10.31,
+                            "min": 1,
+                            "max": 30,
+                            "total": 8,
+                            "p0_001": 1,
+                            "p0_01": 1,
+                            "p0_1": 1,
+                            "p1": 1,
+                            "p2_5": 1,
+                            "p10": 1,
+                            "p25": 2,
+                            "p50": 3,
+                            "p75": 20,
+                            "p90": 30,
+                            "p97_5": 30,
+                            "p99": 30,
+                            "p99_9": 30,
+                            "p99_99": 30,
+                            "p99_999": 30
+                        },
+                        "s0_r1": {
+                            "average": 11,
+                            "mean": 11,
+                            "stddev": 10.31,
+                            "min": 1,
+                            "max": 30,
+                            "total": 8,
+                            "p0_001": 1,
+                            "p0_01": 1,
+                            "p0_1": 1,
+                            "p1": 1,
+                            "p2_5": 1,
+                            "p10": 1,
+                            "p25": 2,
+                            "p50": 3,
+                            "p75": 20,
+                            "p90": 30,
+                            "p97_5": 30,
+                            "p99": 30,
+                            "p99_9": 30,
+                            "p99_99": 30,
+                            "p99_999": 30
+                        }
+                    },
+                    "averagRequestThroughput": 4.8,
+                    "averageByteThroughput": 72,
+                    "requestThroughputStats": {
+                        "average": 2.4,
+                        "mean": 2.4,
+                        "stddev": 2.16,
+                        "min": 1,
+                        "max": 8,
+                        "total": 10,
+                        "p0_001": 0,
+                        "p0_01": 0,
+                        "p0_1": 0,
+                        "p1": 0,
+                        "p2_5": 0,
+                        "p10": 0,
+                        "p25": 1,
+                        "p50": 2,
+                        "p75": 3,
+                        "p90": 4,
+                        "p97_5": 8,
+                        "p99": 8,
+                        "p99_9": 8,
+                        "p99_99": 8,
+                        "p99_999": 8
+                    },
+                    "byteThroughputStats": {
+                        "average": 36,
+                        "mean": 36,
+                        "stddev": 27.28,
+                        "min": 10,
+                        "max": 90,
+                        "total": 10,
+                        "p0_001": 0,
+                        "p0_01": 0,
+                        "p0_1": 0,
+                        "p1": 0,
+                        "p2_5": 0,
+                        "p10": 0,
+                        "p25": 20,
+                        "p50": 30,
+                        "p75": 40,
+                        "p90": 80,
+                        "p97_5": 90,
+                        "p99": 90,
+                        "p99_9": 90,
+                        "p99_99": 90,
+                        "p99_999": 90
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "sessionId": 2,
+        "sessionName": "Kaskade TEST2",
+        "overview": "This is a second test session.\nTest\n",
+        "createdBy": "Alice",
+        "createdOn": 1705798537000,
+        "lastModified": 1705798573000,
+        "servers": [
+            "localhost:3000"
+        ],
+        "requests": [
+            {
+                "requestName": "Get all users",
+                "url": "/api/getallusers",
+                "method": "GET",
+                "headers": {
+                    "Content-type": "application/json"
+                }
+            }
+        ],
+        "history": []
+    },
+    {
+        "sessionId": 1706145287438,
+        "sessionName": "New Session",
+        "requests": [],
+        "createdOn": 1706145287438,
+        "lastModified": 1706145287438
+    }
+]
