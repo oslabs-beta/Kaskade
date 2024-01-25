@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import store from '../../../redux/store';
 import { useDispatch, useSelector } from "react-redux";
-import { setRunTabData } from "../../../redux/dataSlice";
+import { setDemoData, setRunTabData } from "../../../redux/dataSlice";
 import { useParams, useNavigate } from 'react-router-dom';
 
-const result = await window.electronAPI.kaskadestart();
-console.log('RESULT: ', result)
+const f = async () => {
+  const result = await window.electronAPI.kaskadestart();
+  console.log(result)
+  store.dispatch(setDemoData(result));
+}
 
 const RunTab = () => {
   const dispatch = useDispatch();
@@ -109,7 +113,9 @@ const RunTab = () => {
         </label>
         <br />
       </form>
-        <button type="button" onClick={handleRunButton}>Run</button>
+        <button type="button" onClick={f}>Run</button>
+
+        {/* <button type="button" onClick={handleRunButton}>Run</button> */}
         <button onClick={() => { navigate("/result/" + sessionId + "/" + 1660926192826 )}}>Result</button>
     </div>
   );

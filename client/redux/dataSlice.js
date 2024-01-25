@@ -45,8 +45,12 @@ const dataSlice = createSlice({
       // call main process to write data file
       window.electronAPI.writeDataFile(JSON.stringify(state.datafile));
     },
+    // For presentation purpose only (delete after presentation 01/25/2024, also setDemoData on 55)
+    setDemoData: (state, action) => {
+      state.demo = action.payload;
+    },
   },
 });
 
-export const { setData, setRunTabData, currentSessionConfig, createSession } = dataSlice.actions;
+export const { setData, setRunTabData, currentSessionConfig, createSession, setDemoData } = dataSlice.actions;
 export default dataSlice.reducer;
