@@ -1,4 +1,3 @@
 node_modules
 client/dist
 package-lock.json
-kaskadetest-electron.js
