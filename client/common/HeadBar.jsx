@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import path from 'node:path';
 
 const HeadBar = () => {
     const HeadBarContainer = styled.div`

@@ -1,4 +1,5 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain, utilityProcess } from 'electron';
+const {fork, spawn} = require('child_process');
 import path from 'node:path'
 
 process.env.DIST = path.join(__dirname, 'dist')
@@ -49,7 +50,8 @@ app.on('activate', () => {
 
 app.whenReady().then(createWindow)
 
-
+const child = utilityProcess.fork(path.join(__dirname, 'child.js'))
+child.postMessage({ message: 'hello' })
 
 // import electron from 'electron';
 // import { app, BrowserWindow, Menu } from 'electron';
