@@ -8,6 +8,7 @@ import SideBar from "./sidebars/SideBar.jsx"
 import History from "./pages/History/History.jsx";
 import Sessions from "./pages/Sessions/Sessions.jsx"
 import Requests from "./pages/Requests/Requests.jsx"
+import Result from "./pages/Result/Result.jsx"
 
 const App = (props) => {
 
@@ -55,6 +56,10 @@ const App = (props) => {
                     <Route path="/history" element={<Layout page="history" />}>
                         <Route path='' element={<History /> } />
                         <Route path=":id" element={<History />} />
+                    </Route>
+
+                    <Route path="/result" element={<Layout page="sessions" />}>
+                        <Route path=':id/:runId' element={<Result />} />
                     </Route>
                 </Routes>
             </Router>
