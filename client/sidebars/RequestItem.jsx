@@ -15,6 +15,8 @@ const RequestItem = (props) => {
         paddingBottom: "2px"
     };
 
+    // console.log(props.request)
+
     // Find what is the currently "selected" request.
     const params = useParams();
     const selectedRequestId = params.requestId;
@@ -44,7 +46,7 @@ const RequestItem = (props) => {
     }
 
     return (
-        <div style={requestDivStyle} onClick={() => { navigate("/sessions/" + props.sessionId + "/" + props.requestId) }}>
+        <div style={requestDivStyle} onClick={() => { navigate(`/sessions/${props.sessionId}/${props.requestId}`, { state: { request: props.request } }) }}>
             <div style={requestMethodStyle}><label>{props.request.method}</label></div>
             <label>{props.request.requestName}</label>
         </div>

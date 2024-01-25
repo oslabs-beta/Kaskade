@@ -11,7 +11,7 @@ const OverviewTab = (props) => {
     // Get the session Id from URL parameters.
     const params = useParams();
     const sessionId = params.id;
-    console.log("Session Id is : ", sessionId);
+    // console.log("Session Id is : ", sessionId);
 
     // Get the state of this session.
     const overviewState = useSelector((state) => {
@@ -22,7 +22,7 @@ const OverviewTab = (props) => {
         }
         return null;
     });
-    console.log("Overview State: ", overviewState)
+    // console.log("Overview State: ", overviewState)
 
     if (!overviewState) {
         return (
