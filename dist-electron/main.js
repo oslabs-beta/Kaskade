@@ -11,13 +11,16 @@ function createWindow() {
   electron.ipcMain.handle("read-data-file", () => {
     return fs.readFileSync(path.join(__dirname, "../datafile.json"), "utf8");
   });
-  electron.ipcMain.handle("kaskade-start", () => {
-    const child = electron.utilityProcess.fork(path.join(__dirname, "child.js"));
-    child.postMessage({ message: "KASKADE FIRED!" });
-    child.on("message", (data) => {
-      console.log(data);
-      return data;
+  electron.ipcMain.handle("kaskade-start", async () => {
+    const result = new Promise((resolve, reject) => {
+      const child = electron.utilityProcess.fork(path.join(__dirname, "child.js"));
+      child.postMessage({ message: "KASKADE FIRED!" });
+      child.on("message", (data) => {
+        console.log(data);
+        resolve(data);
+      });
     });
+    return result;
   });
   electron.ipcMain.on("write-data-file", (event, content) => {
     fs.writeFileSync(path.join(__dirname, "../datafile.json"), content);

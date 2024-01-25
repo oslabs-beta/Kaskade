@@ -16,13 +16,16 @@ function createWindow() {
     return fs.readFileSync(path.join(__dirname, "../datafile.json"), "utf8"); 
   });
 
-  ipcMain.handle('kaskade-start', () =>{
-    const child = utilityProcess.fork(path.join(__dirname, 'child.js'))
-    child.postMessage({ message: 'KASKADE FIRED!' });
-    child.on('message', (data) => {
-      console.log(data)
-      return data;
-    })
+  ipcMain.handle('kaskade-start', async () => {
+    const result = new Promise((resolve, reject) => {
+      const child = utilityProcess.fork(path.join(__dirname, 'child.js'))
+      child.postMessage({ message: 'KASKADE FIRED!' });
+      child.on('message', (data) => {
+        console.log(data)
+        resolve(data);
+      })
+    });
+    return result;
   })
 
   ipcMain.on('write-data-file', (event, content) => {

@@ -31,8 +31,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 const data = await window.electronAPI.readDataFile();
 // Dispatch the setData action to populate the initial state with datafile.json
 store.dispatch(setData(JSON.parse(data)));
-let result = await window.electronAPI.kaskadestart();
-console.log('RESULT:', result)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const darkTheme = createTheme({

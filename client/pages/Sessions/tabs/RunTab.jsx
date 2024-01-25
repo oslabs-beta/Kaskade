@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setRunTabData } from "../../../redux/dataSlice";
-
+const result = await window.electronAPI.kaskadestart();
+console.log('RESULT: ', result)
 const RunTab = () => {
   const dispatch = useDispatch();
   const datafile = useSelector((state) => state.data.datafile);
