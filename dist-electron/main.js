@@ -1,12 +1,27 @@
 "use strict";
 const electron = require("electron");
 const path = require("node:path");
+const fs = require("node:fs");
 require("child_process");
 process.env.DIST = path.join(__dirname, "dist");
 process.env.VITE_PUBLIC = electron.app.isPackaged ? process.env.DIST : path.join(process.env.DIST, "../public");
 let win;
 const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
 function createWindow() {
+  electron.ipcMain.handle("read-data-file", () => {
+    return fs.readFileSync(path.join(__dirname, "../datafile.json"), "utf8");
+  });
+  electron.ipcMain.handle("kaskade-start", () => {
+    const child = electron.utilityProcess.fork(path.join(__dirname, "child.js"));
+    child.postMessage({ message: "KASKADE FIRED!" });
+    child.on("message", (data) => {
+      console.log(data);
+      return data;
+    });
+  });
+  electron.ipcMain.on("write-data-file", (event, content) => {
+    fs.writeFileSync(path.join(__dirname, "../datafile.json"), content);
+  });
   win = new electron.BrowserWindow({
     // icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
     webPreferences: {
@@ -34,5 +49,3 @@ electron.app.on("activate", () => {
   }
 });
 electron.app.whenReady().then(createWindow);
-const child = electron.utilityProcess.fork(path.join(__dirname, "child.js"));
-child.postMessage({ message: "hello" });

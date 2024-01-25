@@ -14,7 +14,17 @@ const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
 function createWindow() {
   ipcMain.handle('read-data-file', () => {
     return fs.readFileSync(path.join(__dirname, "../datafile.json"), "utf8"); 
+  });
+
+  ipcMain.handle('kaskade-start', () =>{
+    const child = utilityProcess.fork(path.join(__dirname, 'child.js'))
+    child.postMessage({ message: 'KASKADE FIRED!' });
+    child.on('message', (data) => {
+      console.log(data)
+      return data;
+    })
   })
+
   ipcMain.on('write-data-file', (event, content) => {
       fs.writeFileSync(path.join(__dirname, "../datafile.json"), content);
   })
@@ -56,9 +66,6 @@ app.on('activate', () => {
 })
 
 app.whenReady().then(createWindow)
-
-const child = utilityProcess.fork(path.join(__dirname, 'child.js'))
-child.postMessage({ message: 'hello' })
 
 // import electron from 'electron';
 // import { app, BrowserWindow, Menu } from 'electron';

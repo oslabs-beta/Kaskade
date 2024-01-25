@@ -1,6 +1,17 @@
 "use strict";
 const electron = require("electron");
 electron.contextBridge.exposeInMainWorld("ipcRenderer", withPrototype(electron.ipcRenderer));
+electron.contextBridge.exposeInMainWorld("electronAPI", {
+  readDataFile: () => {
+    return electron.ipcRenderer.invoke("read-data-file");
+  },
+  writeDataFile: (content) => {
+    return electron.ipcRenderer.send("write-data-file", content);
+  },
+  kaskadestart: () => {
+    return electron.ipcRenderer.invoke("kaskade-start");
+  }
+});
 function withPrototype(obj) {
   const protos = Object.getPrototypeOf(obj);
   for (const [key, value] of Object.entries(protos)) {
