@@ -9,6 +9,7 @@ const printResults = require('./printResults');
 const calculate = require('./calculate');
 
 async function manager(opts){
+  let final_result;
   const startTime = Date.now();
 
   const progressBar = new cliProgress.SingleBar({
@@ -32,7 +33,8 @@ async function manager(opts){
       const result = await Promise.all(metricsArr);
       clearInterval(progressInterval);
       progressBar.stop(); 
-      console.log(printResults(calculate(result, opts)));
+      final_result = calculate(result, opts);
+      console.log(printResults(final_result));
     }
   else {
     const workerPromises = [];
@@ -58,13 +60,15 @@ async function manager(opts){
     clearInterval(progressInterval);
     progressBar.stop();
 
-    console.log(printResults(calculate(final, opts)));
-
+    final_result = calculate(final, opts);
+    console.log(printResults(final_result));
   } 
 
 const endTime = Date.now(); 
 const elapsedTime = (endTime - startTime) / 1000;
 console.log(`Total elapsed time: ${elapsedTime.toFixed(2)} seconds`);
+
+return final_result; 
 
 }
 

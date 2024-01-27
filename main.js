@@ -1,4 +1,5 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, utilityProcess } from 'electron';
+const {fork, spawn} = require('child_process');
 import path from 'node:path'
 import fs from 'node:fs'
 
@@ -13,7 +14,20 @@ const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
 function createWindow() {
   ipcMain.handle('read-data-file', () => {
     return fs.readFileSync(path.join(__dirname, "../datafile.json"), "utf8"); 
+  });
+
+  ipcMain.handle('kaskade-start', async () => {
+    const result = new Promise((resolve, reject) => {
+      const child = utilityProcess.fork(path.join(__dirname, 'child.js'))
+      child.postMessage({ message: 'KASKADE FIRED!' });
+      child.on('message', (data) => {
+        console.log(data)
+        resolve(data);
+      })
+    });
+    return result;
   })
+
   ipcMain.on('write-data-file', (event, content) => {
       fs.writeFileSync(path.join(__dirname, "../datafile.json"), content);
   })
@@ -55,8 +69,6 @@ app.on('activate', () => {
 })
 
 app.whenReady().then(createWindow)
-
-
 
 // import electron from 'electron';
 // import { app, BrowserWindow, Menu } from 'electron';

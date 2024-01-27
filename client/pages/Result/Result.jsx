@@ -31,10 +31,16 @@ const Result = (props) => {
         return null;
     });
     console.log("result State: ", resultState)
+    const demoData = useSelector((state) => {return state.data.demo});
+    console.log("demoData: ", demoData)
 
     if (!resultState) {
         return (
-            <div><p>Unknown result Id: {runId}</p></div>
+            <>
+                <div><p>Unknown result Id: {runId}</p></div>
+                <div>RESULT: {JSON.stringify(demoData)}</div>
+
+            </>
         )
     }
 
