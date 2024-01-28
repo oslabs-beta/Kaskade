@@ -5,7 +5,7 @@ contextBridge.exposeInMainWorld('ipcRenderer', withPrototype(ipcRenderer))
 contextBridge.exposeInMainWorld('electronAPI', {
   readDataFile: () => { return ipcRenderer.invoke('read-data-file'); },
   writeDataFile: (content) => { return ipcRenderer.send('write-data-file', content); },
-  kaskadestart:  () => { return  ipcRenderer.invoke('kaskade-start');}
+  kaskadestart:  (opts) => { return  ipcRenderer.invoke('kaskade-start', opts);}
 })
 
 // `exposeInMainWorld` can't detect attributes and methods of `prototype`, manually patching it.

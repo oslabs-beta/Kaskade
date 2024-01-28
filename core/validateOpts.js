@@ -6,9 +6,9 @@ function validateOpts(opts){
     (opts.servers !== undefined 
     && opts.testDuration !== undefined
     && opts.concurrentUsers !== undefined
-    && opts.sessions !== undefined);
-  
-  if(required_opts_available){
+    && opts.requests !== undefined &&
+    opts.numOfWorkers !== undefined)
+    if(required_opts_available){
 
     // helper functions
     const isValidUrl = urlString => {
@@ -44,25 +44,26 @@ function validateOpts(opts){
       }
     };
     
-    const isValidSession = session => {
-      const { sessionName, requests } = session;
-      if(!sessionName || !requests){
-        throw new Error('sessionName or requests missing');
-      }
-      else{
-        if(!Array.isArray(requests) || requests.length < 1 || typeof sessionName !== 'string'){
-          throw new Error('Possible error: \n0.requests is not an array\n1.requests is an empty array\n2.sessionName is not a string');
-        }
-        else{
-          return requests.every(request => {return isValidRequest(request)});
-        }
-      }
-    };
+    // const isValidSession = session => {
+    //   const { sessionName, requests } = session;
+    //   if(!sessionName || !requests){
+    //     throw new Error('sessionName or requests missing');
+    //   }
+    //   else{
+    //     if(!Array.isArray(requests) || requests.length < 1 || typeof sessionName !== 'string'){
+    //       throw new Error('Possible error: \n0.requests is not an array\n1.requests is an empty array\n2.sessionName is not a string');
+    //     }
+    //     else{
+    //       return requests.every(request => {return isValidRequest(request)});
+    //     }
+    //   }
+    // };
+    
     let valid_servers = Array.isArray(opts.servers) && opts.servers.length >= 1 && opts.servers.every(url => isValidUrl(url));;
     let valid_testDuration = Number.isInteger(opts.testDuration) && opts.testDuration >= 1;
     let valid_concurrentUsers = Number.isInteger(opts.concurrentUsers) && opts.concurrentUsers >= 1;
-
-    let valid_sessions = Array.isArray(opts.sessions) && opts.sessions.length >= 1 && opts.sessions.every(session => isValidSession(session));
+    let valid_numOfWorkers = Number.isInteger(opts.numOfWorkers) && opts.numOfWorkers >= 1;
+    let valid_requests = Array.isArray(opts.requests) && opts.requests.length >= 1 && opts.requests.every(request => isValidRequest(request));
 
     if(!valid_servers){
       throw new Error('Invalid servers under config file');
@@ -73,8 +74,11 @@ function validateOpts(opts){
     else if(!valid_concurrentUsers){
       throw new Error('Invalid concurrentUsers under config file, concurrentUsers should be a positive integer');
     }
-    else if(!valid_sessions){
-      throw new Error('Invalid sessions under config file, ');
+    else if(!valid_numOfWorkers){
+      throw new Error('Invalid numOfWorkers under config file, numOfWorkers should be a positive integer');
+    }
+    else if(!valid_requests){
+      throw new Error('Invalid requests under config file, ');
     }
     else{
       return true;
