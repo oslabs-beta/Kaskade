@@ -11,6 +11,7 @@
         ],
         "requests": [
             {
+                "requestId": 0,
                 "requestName": "Get all users",
                 "url": "/api/getallusers",
                 "method": "GET",
@@ -295,6 +296,7 @@
         ],
         "requests": [
             {
+                "requestId": 0,
                 "requestName": "Get all users",
                 "url": "/api/getallusers",
                 "method": "GET",
