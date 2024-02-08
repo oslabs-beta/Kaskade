@@ -40,7 +40,7 @@ function runnerCb(config, resultCb) {
         }
         // 3. send one request
         metrics.beforeSendRequest(sessionId, requestId);
-        httpClient.makeRequest(config.sessions[sessionId].requests[requestId], onResponse, onError);  
+        httpClient.makeRequest(config.requests[requestId], onResponse, onError);  
     }
 
     function onResponse(data) {
@@ -49,7 +49,7 @@ function runnerCb(config, resultCb) {
         // 5. send to the next request
         requestId ++;
         // check if this session ends; if so, start a new session
-        if (requestId >= config.sessions[sessionId].requests.length) {
+        if (requestId >= config.requests.length) {
             requestId = 0;
             // to-do: support multiple sessions for stretch
         }

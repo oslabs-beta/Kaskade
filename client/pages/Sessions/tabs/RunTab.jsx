@@ -4,11 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setDemoData, setRunTabData } from "../../../redux/dataSlice";
 import { useParams, useNavigate } from 'react-router-dom';
 
-const f = async () => {
-  const result = await window.electronAPI.kaskadestart();
-  console.log(result)
-  store.dispatch(setDemoData(result));
-}
 
 const RunTab = () => {
   const dispatch = useDispatch();
@@ -37,13 +32,13 @@ const RunTab = () => {
     } else {
       updatedConfigCopy[inputName] = parseInt(inputValue);
     }
-
+    console.log(updatedConfigCopy)
     setUpdatedConfig(updatedConfigCopy);
   };
 
   // console.log("updatedConfig: ", updatedConfig)
 
-  const handleRunButton = () =>{
+  const handleRunButton = async () =>{
     //primative check to make sure the user filled out the config inputs. handler function will not execute 
     //if user doesn't fill out expected parameters
     if (
@@ -53,10 +48,11 @@ const RunTab = () => {
       ) {
         return;
       }
-      
-      
-      //updatedConfig state is an object that should be able to be passed as our existing configFile format
     console.log("updatedConfig to pass to core logic: ", updatedConfig)
+    const result = await window.electronAPI.kaskadestart(updatedConfig);
+    console.log(result)
+    store.dispatch(setDemoData(result));
+      //updatedConfig state is an object that should be able to be passed as our existing configFile format
   }
 
 
@@ -113,9 +109,8 @@ const RunTab = () => {
         </label>
         <br />
       </form>
-        <button type="button" onClick={f}>Run</button>
 
-        {/* <button type="button" onClick={handleRunButton}>Run</button> */}
+        <button type="button" onClick={handleRunButton}>Run</button>
         <button onClick={() => { navigate("/result/" + sessionId + "/" + 1660926192826 )}}>Result</button>
     </div>
   );

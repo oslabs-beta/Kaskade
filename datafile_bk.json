@@ -17,6 +17,18 @@
                 "headers": {
                     "Content-type": "application/json"
                 }
+            },
+            {
+                "requestName": "Login",
+                "url": "/api/login",
+                "method": "POST",
+                "body": {
+                    "username": "testusername",
+                    "password": "testpassword"
+                },
+                "headers": {
+                    "Content-type": "application/json"
+                }
             }
         ],
         "history": [
