@@ -8,8 +8,8 @@ electron.contextBridge.exposeInMainWorld("electronAPI", {
   writeDataFile: (content) => {
     return electron.ipcRenderer.send("write-data-file", content);
   },
-  kaskadestart: () => {
-    return electron.ipcRenderer.invoke("kaskade-start");
+  kaskadestart: (opts) => {
+    return electron.ipcRenderer.invoke("kaskade-start", opts);
   }
 });
 function withPrototype(obj) {
