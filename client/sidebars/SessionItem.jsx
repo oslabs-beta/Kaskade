@@ -4,6 +4,21 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { currentSessionConfig } from '../redux/dataSlice';
 import RequestItem from "./RequestItem.jsx";
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+
+const options = [
+    'Add Request',
+    'Edit',
+    'Duplicate Session',
+    'Rename Session',
+    'Delete Session',
+];
+
+const ITEM_HEIGHT = 48;
+
 
 
 const SessionItem = (props) => {
@@ -30,8 +45,8 @@ const SessionItem = (props) => {
         // 1. Highlight the session div if we don't select any request in it.
         if (!params.requestId) {
             sessionDivStyle.backgroundColor = "rgba(255, 255, 255, 0.2)";
-        
-        dispatch(currentSessionConfig(props.session));
+
+            dispatch(currentSessionConfig(props.session));
         }
 
         // 2. Show requests.
@@ -45,10 +60,52 @@ const SessionItem = (props) => {
         }
     }
 
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
     return (
         <div>
             <div style={sessionDivStyle} onClick={() => { navigate("/sessions/" + props.session.sessionId); }}>
                 <h4>{props.session.sessionName}</h4>
+                <div>
+                    <IconButton
+                        aria-label="more"
+                        id="long-button"
+                        aria-controls={open ? 'long-menu' : undefined}
+                        aria-expanded={open ? 'true' : undefined}
+                        aria-haspopup="true"
+                        onClick={handleClick}
+                    >
+                        <MoreVertIcon />
+                    </IconButton>
+                    <Menu
+                        id="long-menu"
+                        MenuListProps={{
+                            'aria-labelledby': 'long-button',
+                        }}
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        PaperProps={{
+                            style: {
+                                maxHeight: ITEM_HEIGHT * 4.5,
+                                width: '20ch',
+                            },
+                        }}
+                    >
+                        {options.map((option) => (
+                            <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
+                                {option}
+                            </MenuItem>
+                        ))}
+                    </Menu>
+                </div>
             </div>
             {requests}
         </div>

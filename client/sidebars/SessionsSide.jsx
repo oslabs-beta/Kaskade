@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { createSession } from '../redux/dataSlice';
 import AddIcon from '@mui/icons-material/Add';
 
+
 const SessionsSide = () => {
     const dispatch = useDispatch();
     const sessionState = useSelector((state) => state.data.datafile);
