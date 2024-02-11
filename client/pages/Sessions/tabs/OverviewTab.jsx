@@ -3,6 +3,8 @@ import { render } from "react-dom";
 import styled from "styled-components";
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 const OverviewTab = (props) => {
     console.log("Overview page.");
@@ -49,14 +51,28 @@ const OverviewTab = (props) => {
         display:flex;
         flex-direction: column;
     `
+    const handleSelect = (e, newValue) => {
+        console.log("Session name is: ", newValue);
+       
+    }
 
     return (
         <OverviewDiv>
             <LeftDiv>
                 <div>
-                    <h2>{overviewState.sessionName}</h2>
+                    {/* <h2>{overviewState.sessionName}</h2> */}
+                    <Box
+                        component="form"
+                        sx={{
+                            '& > :not(style)': { m: 1, width: '25ch' },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                    >
+                        <TextField id="standard-basic" label="Standard" variant="standard" onChange={handleSelect}/>
+                    </Box>
                 </div>
-                <div style={{whiteSpace : "pre-wrap"}}>
+                <div style={{ whiteSpace: "pre-wrap" }}>
                     {overviewState.overview}
                 </div>
                 <div>

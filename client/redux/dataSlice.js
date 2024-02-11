@@ -71,8 +71,12 @@ const dataSlice = createSlice({
       window.electronAPI.writeDataFile(JSON.stringify(state.datafile));
     },
     deleteSession: (state, action) => {
-      const session = action.payload;
-      let index = 
+      const sessionId = action.payload;
+      for (let i = 0; i < state.datafile.length; i++) {
+        if (state.datafile[i].sessionId == sessionId) {
+          state.datafile.splice(i, 1);
+        }
+      }
     
       // call main process to write data file
       window.electronAPI.writeDataFile(JSON.stringify(state.datafile));
@@ -85,5 +89,5 @@ const dataSlice = createSlice({
   },
 });
 
-export const { setData, setRunTabData, currentSessionConfig, createSession, setDemoData, addRequest,  } = dataSlice.actions;
+export const { setData, setRunTabData, currentSessionConfig, createSession, setDemoData, addRequest, duplicateSession, deleteSession  } = dataSlice.actions;
 export default dataSlice.reducer;

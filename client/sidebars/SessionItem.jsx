@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { currentSessionConfig, addRequest, duplicateSession, renameSession, deleteSession } from '../redux/dataSlice';
+import { currentSessionConfig, addRequest, duplicateSession, deleteSession } from '../redux/dataSlice';
 import RequestItem from "./RequestItem.jsx";
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -71,7 +71,7 @@ const SessionItem = (props) => {
         } else if (option === "Duplicate Session") {
             dispatch(duplicateSession(props.session));   
         } else if (option === "Rename Session") {
-            dispatch(renameSession(selectedSessionId));     
+            dispatch(renameSession(props.session));     
         } else if (option === "Delete Session") {
             dispatch(deleteSession(selectedSessionId));  
         } 
