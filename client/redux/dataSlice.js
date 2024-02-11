@@ -45,6 +45,39 @@ const dataSlice = createSlice({
       // call main process to write data file
       window.electronAPI.writeDataFile(JSON.stringify(state.datafile));
     },
+    addRequest: (state, action) => {
+      const sessionId = action.payload;
+      const newRequest = {};
+      newRequest.requestId = Date.now();
+      newRequest.requestName = "New Request";
+      for (let i = 0; i < state.datafile.length; i++) {
+        if (state.datafile[i].sessionId == sessionId) {
+          state.datafile[i].requests.push(newRequest);
+        }
+      }
+      // call main process to write data file
+      window.electronAPI.writeDataFile(JSON.stringify(state.datafile));
+    },
+    duplicateSession: (state, action) => {
+      const oldSession = action.payload;
+      const newSession = JSON.parse(JSON.stringify(oldSession));
+      newSession.sessionId = Date.now();
+      newSession.sessionName = "Copy of " + newSession.sessionName ;
+      newSession.createdOn = newSession.sessionId;
+      newSession.lastModified = newSession.sessionId;
+      state.datafile.push(newSession);
+    
+      // call main process to write data file
+      window.electronAPI.writeDataFile(JSON.stringify(state.datafile));
+    },
+    deleteSession: (state, action) => {
+      const session = action.payload;
+      let index = 
+    
+      // call main process to write data file
+      window.electronAPI.writeDataFile(JSON.stringify(state.datafile));
+    },
+
     // For presentation purpose only (delete after presentation 01/25/2024, also setDemoData on 55)
     setDemoData: (state, action) => {
       state.demo = action.payload;
@@ -52,5 +85,5 @@ const dataSlice = createSlice({
   },
 });
 
-export const { setData, setRunTabData, currentSessionConfig, createSession, setDemoData } = dataSlice.actions;
+export const { setData, setRunTabData, currentSessionConfig, createSession, setDemoData, addRequest,  } = dataSlice.actions;
 export default dataSlice.reducer;

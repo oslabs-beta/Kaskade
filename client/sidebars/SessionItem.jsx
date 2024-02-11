@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { currentSessionConfig } from '../redux/dataSlice';
+import { currentSessionConfig, addRequest, duplicateSession, renameSession, deleteSession } from '../redux/dataSlice';
 import RequestItem from "./RequestItem.jsx";
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -11,7 +11,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const options = [
     'Add Request',
-    'Edit',
     'Duplicate Session',
     'Rename Session',
     'Delete Session',
@@ -65,7 +64,17 @@ const SessionItem = (props) => {
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
-    const handleClose = () => {
+    const handleClose = (option) => {
+        console.log('option', option);
+        if (option === "Add Request") {
+            dispatch(addRequest(selectedSessionId));
+        } else if (option === "Duplicate Session") {
+            dispatch(duplicateSession(props.session));   
+        } else if (option === "Rename Session") {
+            dispatch(renameSession(selectedSessionId));     
+        } else if (option === "Delete Session") {
+            dispatch(deleteSession(selectedSessionId));  
+        } 
         setAnchorEl(null);
     };
 
@@ -100,7 +109,7 @@ const SessionItem = (props) => {
                         }}
                     >
                         {options.map((option) => (
-                            <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
+                            <MenuItem key={option} selected={option === 'Pyxis'} onClick={()=> {handleClose(option)}}>
                                 {option}
                             </MenuItem>
                         ))}
