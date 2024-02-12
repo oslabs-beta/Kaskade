@@ -49,12 +49,14 @@ const printResults = ({latencyStats, averagRequestThroughput, averageByteThrough
   })
 
     // add the data into rows for the table
+    for (let session in requestThroughputStats) {
       requestThroughputTable.push(
         // req/sec data formatted to follow table head
-        ['Request Throughput', `${requestThroughputStats['p1']} req/s`, `${requestThroughputStats['p2_5']} req/s`, `${requestThroughputStats['p50']} req/s`,
-        `${requestThroughputStats['p97_5']} req/s`, `${requestThroughputStats['average']} req/s`, `${requestThroughputStats['stddev']} req/s`, 
-        `${requestThroughputStats['min']} req/s`],
+        ['Request Throughput', `${requestThroughputStats[session]['p1']} req/s`, `${requestThroughputStats[session]['p2_5']} req/s`, `${requestThroughputStats[session]['p50']} req/s`,
+        `${requestThroughputStats[session]['p97_5']} req/s`, `${requestThroughputStats[session]['average']} req/s`, `${requestThroughputStats[session]['stddev']} req/s`, 
+        `${requestThroughputStats[session]['min']} req/s`],
       )
+    }
     
     logToLocalStr(requestThroughputTable.toString())
 
@@ -72,12 +74,14 @@ const printResults = ({latencyStats, averagRequestThroughput, averageByteThrough
   })
 
     // add the data into rows for the table
+    for (let session in byteThroughputStats) {
       byteThroughputTable.push(
         // req/sec data formatted to follow table head
-        ['Bytes Throughput', `${prettierBytes(byteThroughputStats['p1'])}/s`, `${prettierBytes(byteThroughputStats['p2_5'])}/s`, `${prettierBytes(byteThroughputStats['p50'])}/s`,
-        `${prettierBytes(byteThroughputStats['p97_5'])}/s`, `${prettierBytes(byteThroughputStats['average'])}/s`, `${prettierBytes(byteThroughputStats['stddev'])}/s`, 
-        `${prettierBytes(byteThroughputStats['min'])}/s`],
+        ['Bytes Throughput', `${prettierBytes(byteThroughputStats[session]['p1'])}/s`, `${prettierBytes(byteThroughputStats[session]['p2_5'])}/s`, `${prettierBytes(byteThroughputStats[session]['p50'])}/s`,
+        `${prettierBytes(byteThroughputStats[session]['p97_5'])}/s`, `${prettierBytes(byteThroughputStats[session]['average'])}/s`, `${prettierBytes(byteThroughputStats[session]['stddev'])}/s`, 
+        `${prettierBytes(byteThroughputStats[session]['min'])}/s`],
       )
+    }
     
     logToLocalStr(byteThroughputTable.toString())
 
@@ -161,50 +165,54 @@ const printResults = ({latencyStats, averagRequestThroughput, averageByteThrough
 //   averagRequestThroughput: 2.4,
 //   averageByteThroughput: 36,
 //   requestThroughputStats: {
-//     average: 2.4,
-//     mean: 2.4,
-//     stddev: 2.16,
-//     min: 1,
-//     max: 8,
-//     total: 10,
-//     p0_001: 0,
-//     p0_01: 0,
-//     p0_1: 0,
-//     p1: 0,
-//     p2_5: 0,
-//     p10: 0,
-//     p25: 1,
-//     p50: 2,
-//     p75: 3,
-//     p90: 4,
-//     p97_5: 8,
-//     p99: 8,
-//     p99_9: 8,
-//     p99_99: 8,
-//     p99_999: 8
+//     s0_r0: {
+//       average: 2.4,
+//       mean: 2.4,
+//       stddev: 2.16,
+//       min: 1,
+//       max: 8,
+//       total: 10,
+//       p0_001: 0,
+//       p0_01: 0,
+//       p0_1: 0,
+//       p1: 0,
+//       p2_5: 0,
+//       p10: 0,
+//       p25: 1,
+//       p50: 2,
+//       p75: 3,
+//       p90: 4,
+//       p97_5: 8,
+//       p99: 8,
+//       p99_9: 8,
+//       p99_99: 8,
+//       p99_999: 8
+//     }
 //   },
 //   byteThroughputStats: {
-//     average: 36,
-//     mean: 36,
-//     stddev: 27.28,
-//     min: 10,
-//     max: 90,
-//     total: 10,
-//     p0_001: 0,
-//     p0_01: 0,
-//     p0_1: 0,
-//     p1: 0,
-//     p2_5: 0,
-//     p10: 0,
-//     p25: 20,
-//     p50: 30,
-//     p75: 40,
-//     p90: 80,
-//     p97_5: 90,
-//     p99: 90,
-//     p99_9: 90,
-//     p99_99: 90,
-//     p99_999: 90
+//     s0_r0: {
+//       average: 36,
+//       mean: 36,
+//       stddev: 27.28,
+//       min: 10,
+//       max: 90,
+//       total: 10,
+//       p0_001: 0,
+//       p0_01: 0,
+//       p0_1: 0,
+//       p1: 0,
+//       p2_5: 0,
+//       p10: 0,
+//       p25: 20,
+//       p50: 30,
+//       p75: 40,
+//       p90: 80,
+//       p97_5: 90,
+//       p99: 90,
+//       p99_9: 90,
+//       p99_99: 90,
+//       p99_999: 90
+//     }
 //   }
 // }));
 

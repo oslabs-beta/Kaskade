@@ -23,13 +23,18 @@ class Metrics {
         this.totalSuccessRequest = 0;
 
         // the number of success requests received in each second of the benchmark
-        this.successRequestInEachSecond = [];
+
+        // key: sessionId +requestId; value: an array of counter.
+        // example: {s0_r0: [0, 1, 2, 1], s0_r1: [1, 1, 2, 1], s0_r2: [2, 1, 0, 2]}
+        this.successRequestInEachSecond = {};
 
         // the total number of bytes used to calculate bytes per second throughput
         this.totalBytes = 0;
 
-         // the number of bytes received in each second of the benchmark
-        this.bytesInEachSecond = [];
+        // the number of bytes received in each second of the benchmark
+        // key: sessionId +requestId; value:an array of counter.
+        // example: {s0_r0: [20, 16, 20, 10], s0_r1: [15, 15, 20, 42], s0_r2: [28, 10, 40, 25]}
+        this.bytesInEachSecond = {};
 
     }
 
@@ -59,13 +64,17 @@ class Metrics {
         let currentTime = Date.now();
         let currentSec = Math.floor((currentTime - this.benchmarkStartTime) / 1000);
 
-        while (this.successRequestInEachSecond.length <= currentSec) {
-            this.successRequestInEachSecond.push(0);
-            this.bytesInEachSecond.push(0);
+        if (!(key in this.successRequestInEachSecond)) {
+            this.successRequestInEachSecond[key] = [];
+            this.bytesInEachSecond[key] = [];
+        }
+        while (this.successRequestInEachSecond[key].length <= currentSec) {
+            this.successRequestInEachSecond[key].push(0);
+            this.bytesInEachSecond[key].push(0);
         }
 
-        this.successRequestInEachSecond[currentSec]++;
-        this.bytesInEachSecond[currentSec] += size;
+        this.successRequestInEachSecond[key][currentSec]++;
+        this.bytesInEachSecond[key][currentSec] += size;
     }
 
 
@@ -114,17 +123,31 @@ class Metrics {
                 this.errorStats[key] = otherMetrics.errorStats[key];
             }
         }
-        for (let i = 0; i < otherMetrics.successRequestInEachSecond.length; i++) {
-            if (this.successRequestInEachSecond.length <= i) {
-                this.successRequestInEachSecond.push(0);
+        // successRequestInEachSecond
+        for (let key in otherMetrics.successRequestInEachSecond) {
+            if (key in this.successRequestInEachSecond) {
+                for (let i = 0; i < otherMetrics.successRequestInEachSecond[key].length; i++) {
+                    if (this.successRequestInEachSecond[key].length <= i) {
+                        this.successRequestInEachSecond[key].push(0);
+                    }
+                    this.successRequestInEachSecond[key][i] += otherMetrics.successRequestInEachSecond[key][i];
+                }
+            } else {
+                this.successRequestInEachSecond[key] = [...otherMetrics.successRequestInEachSecond[key]];
             }
-            this.successRequestInEachSecond[i] += otherMetrics.successRequestInEachSecond[i];
         }
-        for (let i = 0; i < otherMetrics.bytesInEachSecond.length; i++) {
-            if (this.bytesInEachSecond.length <= i) {
-                this.bytesInEachSecond.push(0);
+        // bytesInEachSecond
+        for (let key in otherMetrics.bytesInEachSecond) {
+            if (key in this.bytesInEachSecond) {
+                for (let i = 0; i < otherMetrics.bytesInEachSecond[key].length; i++) {
+                    if (this.bytesInEachSecond[key].length <= i) {
+                        this.bytesInEachSecond[key].push(0);
+                    }
+                    this.bytesInEachSecond[key][i] += otherMetrics.bytesInEachSecond[key][i];
+                }
+            } else {
+                this.bytesInEachSecond[key] = [...otherMetrics.bytesInEachSecond[key]];
             }
-            this.bytesInEachSecond[i] += otherMetrics.bytesInEachSecond[i];
         }
     }
 }
