@@ -1,16 +1,23 @@
-import React from "react";
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
+import CloseIcon from '@mui/icons-material/Close';
+import { useDispatch } from "react-redux";
+import { deleteRequest } from "../redux/dataSlice";
+
 
 const RequestItem = (props) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     // The basic styling of request div.
     const requestDivStyle = {
         display: "flex",
         flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "stretch",
         marginLeft: "20px",
         paddingLeft: "5px",
+        paddingRight: "8px",
         paddingTop: "2px",
         paddingBottom: "2px"
     };
@@ -45,10 +52,32 @@ const RequestItem = (props) => {
         requestMethodStyle.color = httpMethodToColor[method];
     }
 
+    // Define a state representing whether we should show the "delete" button.
+    const [showDelete, setShowDelete] = useState(false);
+
     return (
-        <div style={requestDivStyle} onClick={() => { navigate(`/sessions/${props.sessionId}/${props.requestId}`, { state: { request: props.request } }) }}>
-            <div style={requestMethodStyle}><label>{props.request.method}</label></div>
-            <label>{props.request.requestName}</label>
+        <div style={requestDivStyle}
+            onClick={() => { navigate(`/sessions/${props.sessionId}/${props.requestId}`, { state: { request: props.request } }) }}
+            onMouseOver={() => { setShowDelete(true); }}
+            onMouseOut={() => { setShowDelete(false); }}
+        >
+            <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={requestMethodStyle}><label>{props.request.method}</label></div>
+                <label>{props.request.requestName}</label>
+            </div>
+            <div>
+                {showDelete ?
+                    <CloseIcon
+                        sx={{ height: "18px" }}
+                        onClick={() => {
+                            dispatch(deleteRequest({
+                                sessionId: props.sessionId,
+                                requestId: props.request.requestId
+                            }));
+                        }}
+                    />
+                    : ""}
+            </div>
         </div>
     );
 };

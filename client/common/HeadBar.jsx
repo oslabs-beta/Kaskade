@@ -6,20 +6,19 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
-const HeadBar = () => {
-    const HeadBarContainer = styled.div`
-        background-color: #1E1E1E;
-        color: #FFFFFF;
-        height: 60px;
-        border-bottom-style: solid;
-        border-bottom-color: #535353;
-        border-bottom-with: 2px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-    `;
+const HeadBarContainer = styled.div`
+    background-color: #1E1E1E;
+    color: #FFFFFF;
+    height: 60px;
+    border-bottom-style: solid;
+    border-bottom-color: #535353;
+    border-bottom-with: 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+`;
 
-    const LogoDiv = styled.div`
+const LogoDiv = styled.div`
     display: flex;
     width: 231px;
     height: 49px;
@@ -33,15 +32,16 @@ const HeadBar = () => {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    `
+`
 
-    const SearchDiv = styled.div`
+const SearchDiv = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
     height:40px;
-    `
+`
 
+const HeadBar = () => {
     const navigate = useNavigate();
 
     // Get all sessions from data file.
@@ -83,7 +83,7 @@ const HeadBar = () => {
                     id="combo-box-demo"
                     options={allValues}
                     sx={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Movie" />}
+                    renderInput={(params) => <TextField {...params} label="Search Kaskade" />}
                     onChange={handleSelect}
                 />
                 {/* <div><TextField id="outlined-basic" label="Search" variant="outlined" onChange={handleSearch}/></div> */}

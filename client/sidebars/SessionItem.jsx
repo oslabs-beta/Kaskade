@@ -31,7 +31,11 @@ const SessionItem = (props) => {
     const sessionDivStyle = {
         paddingLeft: "5px",
         paddingTop: "2px",
-        paddingBottom: "2px"
+        paddingBottom: "2px",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
     };
 
     // Decide what is the currently "selected" session.
