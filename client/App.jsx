@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
 import styled from "styled-components";
 import HeadBar from "./common/HeadBar.jsx"
 import NavBar from "./common/NavBar.jsx"
@@ -9,24 +9,36 @@ import History from "./pages/History/History.jsx";
 import Sessions from "./pages/Sessions/Sessions.jsx"
 import Requests from "./pages/Requests/Requests.jsx"
 import Result from "./pages/Result/Result.jsx"
+import { useSelector } from 'react-redux';
+
+const PageContainer = styled.div`
+    background-color: #000000;
+    color: #FFFFFF;
+    width: 100%;
+    height: 100vh;
+`;
+
+const MainContainer = styled.div`
+    display:flex;
+    flex-direction: row;
+    height: calc(100vh - 50px);
+`;
+
+const OutletContainer = styled.div`
+    background-color: #1E1E1E;
+    width: 100%;
+`
 
 const App = (props) => {
+    // Find the first session in data file, so we can redirect the initial page to the first session.
+    const firstSessionId = useSelector((state) => {
+        if (state.data.datafile.length > 0) {
+            return state.data.datafile[0].sessionId;
+        }
+        return null;
+    });
 
-    const PageContainer = styled.div`
-        background-color: #000000;
-        color: #FFFFFF;
-        width: 100%;
-        height: 100vh;
-    `;
-    const MainContainer = styled.div`
-        display:flex;
-        flex-direction: row;
-        height: calc(100vh - 50px);
-    `;
-    const OutletContainer = styled.div`
-        background-color: #1E1E1E;
-        width: 100%;
-    `
+    // The overall page layout.
     const Layout = (props) => {
         return (
             <PageContainer>
@@ -41,11 +53,14 @@ const App = (props) => {
             </PageContainer>
         );
     };
+
+
+    // Define react router rules.
     return (
         <>
             <Router>
                 <Routes>
-                    <Route path="/" element={<Layout page="home" />} />
+                    <Route path="/" element={<Navigate replace to={'/sessions/' + firstSessionId} />} />
 
                     <Route path="/sessions" element={<Layout page="sessions" />}>
                     <Route path="" element={<Sessions />} />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { render } from "react-dom";
 import styled from "styled-components";
 import { useParams } from 'react-router-dom';
@@ -8,6 +8,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 
 
 const Result = (props) => {
@@ -49,30 +52,6 @@ const Result = (props) => {
         padding: 50px;
     `;
 
-    // Data is an object like following:
-    // {
-    //     "average": 11,
-    //     "mean": 11,
-    //     "stddev": 10.31,
-    //     "min": 1,
-    //     "max": 30,
-    //     "total": 8,
-    //     "p0_001": 1,
-    //     "p0_01": 1,
-    //     "p0_1": 1,
-    //     "p1": 1,
-    //     "p2_5": 1,
-    //     "p10": 1,
-    //     "p25": 2,
-    //     "p50": 3,
-    //     "p75": 20,
-    //     "p90": 30,
-    //     "p97_5": 30,
-    //     "p99": 30,
-    //     "p99_9": 30,
-    //     "p99_99": 30,
-    //     "p99_999": 30
-    // },
     const DrawCDF = (data, label) => {
         const keys = Object.keys(data);
         const percentDataY = [];
@@ -101,6 +80,68 @@ const Result = (props) => {
         )
     }
     
+    let requests = Object.keys(resultState.result.latencyStats);
+    const [latencyGraphId, setLatencyGraphId] = useState(requests[0]);
+
+    let latencyGraphMenuItems = [];
+    for (let i = 0; i < requests.length; ++i) {
+        const requestName = requests[i];
+        latencyGraphMenuItems.push(
+            <MenuItem onClick={() => {
+                setLatencyGraphId(requestName);
+                setRequestThroughputGraphId(null);
+                setByteThroughputGraphId(null);
+                popupState.close();
+            }}>
+                {requestName}
+            </MenuItem>
+        );
+    }
+
+
+    const [requestThroughputGraphId, setRequestThroughputGraphId] = useState(null);
+
+    let requestThroughputGraphMenuItems = [];
+    for (let i = 0; i < requests.length; ++i) {
+        const requestName = requests[i];
+        requestThroughputGraphMenuItems.push(
+            <MenuItem onClick={() => {
+                setRequestThroughputGraphId(requestName);
+                setLatencyGraphId(null);
+                setByteThroughputGraphId(null);
+                popupState.close();
+            }}>
+                {requestName}
+            </MenuItem>
+        );
+    }
+
+    const [byteThroughputGraphId, setByteThroughputGraphId] = useState(null);
+
+    let byteThroughputGraphMenuItems = [];
+    for (let i = 0; i < requests.length; ++i) {
+        const requestName = requests[i];
+        byteThroughputGraphMenuItems.push(
+            <MenuItem onClick={() => {
+                setByteThroughputGraphId(requestName);
+                setLatencyGraphId(null);
+                setRequestThroughputGraphId(null);
+                popupState.close();
+            }}>
+                {requestName}
+            </MenuItem>
+        );
+    }
+
+    let graph;
+    if (latencyGraphId !== null) {
+        graph = DrawCDF(resultState.result.latencyStats[latencyGraphId], latencyGraphId + " Latency");
+    } else if (requestThroughputGraphId !== null) {
+        graph = DrawCDF(resultState.result.requestThroughputStats[requestThroughputGraphId], requestThroughputGraphId + " Request Throughput");
+    } else {
+        graph = DrawCDF(resultState.result.byteThroughputStats[byteThroughputGraphId], byteThroughputGraphId + " Byte Throughput");
+
+    }
 
     return (
         <ResultDiv>
@@ -117,23 +158,46 @@ const Result = (props) => {
                 <label>{resultState.concurrentUsers} users on {resultState.numOfWorkers} threads</label>
             </div>
             <div>
-                <label>Latency Distribution</label>
-                {/* <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
-
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={10}
-                        label="Age"
-                        onChange={() => { }}
-                    >
-                    <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                </FormControl> */}
-                {DrawCDF(resultState.result.latencyStats["s0_r0"], "s0_r0 Latency")}
+                <label>Metrics</label>
+                <PopupState variant="popover" popupId="demo-popup-menu">
+                    {(popupState) => (
+                        <React.Fragment>
+                            <Button variant="contained" {...bindTrigger(popupState)}>
+                               Latency Distribution
+                            </Button>
+                            <Menu {...bindMenu(popupState)}>
+                                {latencyGraphMenuItems}
+                            </Menu>
+                        </React.Fragment>
+                    )}
+                </PopupState>
+                <PopupState variant="popover" popupId="demo-popup-menu">
+                    {(popupState) => (
+                        <React.Fragment>
+                            <Button variant="contained" {...bindTrigger(popupState)}>
+                              Request Throughput
+                            </Button>
+                            <Menu {...bindMenu(popupState)}>
+                                {requestThroughputGraphMenuItems}
+                            </Menu>
+                        </React.Fragment>
+                    )}
+                </PopupState>
+                <PopupState variant="popover" popupId="demo-popup-menu">
+                    {(popupState) => (
+                        <React.Fragment>
+                            <Button variant="contained" {...bindTrigger(popupState)}>
+                               Byte Throughput
+                            </Button>
+                            <Menu {...bindMenu(popupState)}>
+                                {byteThroughputGraphMenuItems}
+                            </Menu>
+                        </React.Fragment>
+                    )}
+                </PopupState>
+            </div>
+            <div>
+                {graph}
             </div>
         </ResultDiv>
     )

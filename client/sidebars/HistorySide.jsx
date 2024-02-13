@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-const HistorySide = () => {
-    const HistorySide = styled.div`
-        display:flex;
-        flex-direction: column;
-    `;
+const HistorySideDiv = styled.div`
+    display:flex;
+    flex-direction: column;
+`;
 
+const HistorySide = () => {
     return (
-        <HistorySide>
+        <HistorySideDiv>
             <p>History 1</p>
             <p>History 2</p>
-        </HistorySide>
+        </HistorySideDiv>
     )
 }
 
