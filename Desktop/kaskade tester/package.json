@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@panda-whale-ptri12/kaskade": "^1.0.13",
+    "autocannon": "^7.14.0",
+    "cli-progress": "^3.12.0"
+  }
+}

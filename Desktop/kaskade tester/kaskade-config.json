@@ -1,0 +1,40 @@
+
+{
+    "servers": ["localhost:3000"],
+    "testDuration": 10,
+    "concurrentUsers": 20,
+    "targetThroughput": 1000,
+    "numOfWorkers": 4,
+    "sessions": [
+      {
+        "sessionName": "test session",
+        "requests": [
+          {
+            "requestName": "get happy art",
+            "url": "/art/fetchArt/happy",
+            "method": "GET",
+            "headers": {
+              "Content-type": "application/json"
+            }
+          },
+          {
+            "requestName": "get angry art",
+            "url": "/art/fetchArt/angry",
+            "method": "GET",
+            "headers": {
+              "Content-type": "application/json"
+            }
+          },
+          {
+            "requestName": "get all users",
+            "url": "/api/users/",
+            "method": "GET",
+            "headers": {
+              "Content-type": "application/json"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  

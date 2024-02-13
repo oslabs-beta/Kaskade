@@ -1,0 +1,25 @@
+{
+    "servers": ["https://im3w2d72p4.execute-api.us-east-1.amazonaws.com"],
+    "testDuration": 10,
+    "concurrentUsers": 20,
+    "targetThroughput": 1000,
+    "numOfWorkers": 1,
+    "sessions": [
+        { 
+            "sessionName": "test session",
+            "requests": [
+                            {
+                                "requestName": "lambda helloworld",
+                                "url": "/default/HelloFromMyTechTalk",
+                                "method": "GET",
+                                "headers": {
+                                "Content-type": "application/json"
+                                }
+                            }
+                        ]
+        }
+    ]
+
+}
+
+  
