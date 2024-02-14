@@ -1,6 +1,9 @@
 # Kaskade - Sequential, Concurrent Server Testing &middot; [![npm version](https://img.shields.io/npm/v/kaskade-benchmarking.svg?style=flat)](https://www.npmjs.com/package/kaskade-benchmarking)
 
 ## Overview
+Kaskade is a server benchmarking tool that runs sequences of stateful, concurrent requests to a deployed or local server. Kaskade utilizes worker threads within Node.js to handle multithreading and create simulated concurrent server requests.
+
+Simply install the npm module, create a config file using the format outlined in the Getting Started section, and import the kaskade-benchmarking module. Once your config file is set up, run the node command on your specified file and watch it go! Metrics tables of latency, byte throughput and requests/second are populated right in the command line.
 
 ## Tech Stack
 [![My Skills](https://skillicons.dev/icons?i=nodejs,javascript,electron,react,redux,css,html,materialui,styledcomponents,aws,postman,vscode,vite,figma&theme=light)](https://skillicons.dev)
@@ -9,7 +12,7 @@
 Install the NPM module [here](https://www.npmjs.com/package/kaskade-benchmarking), or by running `npm i kaskade-benchmarking` in the command line.
 
 ## Getting Started
-To test your server with Kaskade, a configuration file must first be setup. Within the project's root directory, create a **.json** file and define the parameters according to the criteria within the config object below:
+To test your server with Kaskade, a configuration file must be setup. Within the project's root directory, create a **.json** file and define the parameters according to the criteria within the config object below:
 ```
 // The following is an example benchmark config object that Kaskade will accept
 // It comes with detailed comments to explain each field and if the field is required.
@@ -121,8 +124,11 @@ Below is a sample configuration file:
 ```
 
 ## Contributing
+[request a feature or report a bug]
 
-To expediate the inegration process, please copy the below PR example template and modify to reflect any changes to be considered.
+Kaskade's goal is to expand our functionality, but we can't do it without you! One of the great benefits of open source projects, like Kaskade, is the ability for the community to actively contribute. Feel free to fork this project, make changes or fix bugs, and submit a pull request.
+
+To expediate the integration process, please copy the below PR example template and modify to reflect any changes to be considered for merging into the codebase.
 ```
 # Summary
 
@@ -150,6 +156,8 @@ Missing units in table and lack of clarity.
 ```
 
 ## Publications
+Head over to Kaskade's [splash page](URL here) and [LinkedIn](https://www.linkedin.com/company/kaskadebenchmarking/) for more details!
+
 Checkout and clap our Medium article [here](URL HERE) for more details behind Kaskade!
 
 ## Our Team
