@@ -2,7 +2,6 @@
 
 const HttpClient = require("./HttpClient");
 const Metrics = require("./metrics");
-const config = require("./../config/example.json")
 // 1. create an httpClient
 // 1.1. mark benchmark starting time
 // 2. check if testDuration time is over
