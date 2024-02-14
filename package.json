@@ -1,7 +1,7 @@
 {
-  "name": "@panda-whale-ptri12/kaskade",
-  "version": "1.1.0",
-  "description": "",
+  "name": "kaskade-benchmarking",
+  "version": "1.0.1",
+  "description": "Kaskade -- a benchmarking tool.",
   "main": "kaskade.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -26,5 +26,6 @@
     "hdr-histogram-percentiles-obj": "^3.0.0",
     "path": "^0.12.7",
     "prettier-bytes": "^1.0.4"
-  }
+  },
+  "devDependencies": {}
 }
