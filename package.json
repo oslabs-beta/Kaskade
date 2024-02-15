@@ -1,0 +1,31 @@
+{
+  "name": "kaskade-benchmarking",
+  "version": "1.0.3",
+  "description": "Kaskade -- a benchmarking tool.",
+  "main": "kaskade.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oslabs-beta/Kaskade.git"
+  },
+  "keywords": [
+    "benchmarking"
+  ],
+  "author": "Wenzhen Gong, Jingjing Wang, Joel Christopher, Michael Mann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/Kaskade/issues"
+  },
+  "homepage": "https://github.com/oslabs-beta/Kaskade#readme",
+  "dependencies": {
+    "cli-progress": "^3.12.0",
+    "cli-table3": "^0.6.3",
+    "hdr-histogram-js": "^3.0.0",
+    "hdr-histogram-percentiles-obj": "^3.0.0",
+    "path": "^0.12.7",
+    "prettier-bytes": "^1.0.4"
+  },
+  "devDependencies": {}
+}
