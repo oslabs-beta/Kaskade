@@ -28,9 +28,6 @@ const config = {
     // REQUIRED, "testDuration" is the duration of running benchmark test, in seconds.
     testDuration: 600,
 
-    // REQUIRED, the number of concurrent users to access HTTP servers
-    concurrentUsers: 100,
-
     // OPTIONAL, the target number of HTTP requests to send to servers per second
     // if not set, the HTTP requests rate will be unlimited
     targetThroughput: 1000,
