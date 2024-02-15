@@ -126,7 +126,7 @@ Below is a sample configuration file:
 ## Contributing
 [request a feature or report a bug]
 
-Kaskade's goal is to expand our functionality, but we can't do it without you! One of the great benefits of open source projects, like Kaskade, is the ability for the community to actively contribute. Feel free to fork this project, make changes or fix bugs, and submit a pull request.
+Kaskade's goal is to expand our functionality, but we can't do it without you! One of the great benefits of open source projects, like Kaskade, is the ability for the community to actively contribute. Feel free to fork this project, make changes or fix bugs, and submit a pull request to the **dev** branch. Please limit scope of commits to address one feature or bug at a time. 
 
 To expediate the integration process, please copy the below PR example template and modify to reflect any changes to be considered for merging into the codebase.
 ```
@@ -158,7 +158,7 @@ Missing units in table and lack of clarity.
 ## Publications
 Head over to Kaskade's [splash page](URL here) and [LinkedIn](https://www.linkedin.com/company/kaskadebenchmarking/) for more details!
 
-Checkout and clap our Medium article [here](URL HERE) for more details behind Kaskade!
+Checkout and clap our Medium article [here](https://medium.com/@kaskadebenchmarking/kaskade-be7fecb4e75f) for more details behind Kaskade!
 
 ## Our Team
 - Jingjing Wang -> [GitHub](https://github.com/jingjingwangacc), [LinkedIn](https://www.linkedin.com/in/jingjingwangacc)
@@ -168,5 +168,3 @@ Checkout and clap our Medium article [here](URL HERE) for more details behind Ka
 
 ## License
 Kaskade is MIT Licensed
-
-
