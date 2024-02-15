@@ -87,7 +87,6 @@ Below is a sample configuration file:
         "localhost:3000"
     ],
     "testDuration": 600,
-    "concurrentUsers": 100,
     "targetThroughput": 1000,
     "numOfWorkers":4,
     "sessions": [

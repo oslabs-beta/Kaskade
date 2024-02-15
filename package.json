@@ -1,6 +1,6 @@
 {
   "name": "kaskade-benchmarking",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Kaskade -- a benchmarking tool.",
   "main": "kaskade.js",
   "scripts": {
