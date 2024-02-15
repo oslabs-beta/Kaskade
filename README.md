@@ -153,7 +153,7 @@ Missing units in table and lack of clarity.
 ```
 
 ## Publications
-Head over to Kaskade's [splash page](URL here) and [LinkedIn](https://www.linkedin.com/company/kaskadebenchmarking/) for more details!
+Head over to Kaskade's [splash page](https://www.kaskade-benchmarking.co) and [LinkedIn](https://www.linkedin.com/company/kaskadebenchmarking/) for more details!
 
 Checkout and clap our Medium article [here](https://medium.com/@kaskadebenchmarking/kaskade-be7fecb4e75f) for more details behind Kaskade!
 
